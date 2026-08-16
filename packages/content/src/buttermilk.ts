@@ -1,5 +1,27 @@
-import { html } from "@butter/core";
+import { type Html, html } from "@butter/core";
 import type { Exclusion } from "./types.ts";
+
+/** The page calls this "Buttermilk" — the liquid you drain off the churn. */
+export const BUTTERMILK: {
+  readonly heading: string;
+  readonly deck: string;
+  readonly intro: Html;
+} = {
+  heading: "Buttermilk",
+  deck: "What gets poured off",
+
+  intro: html(`
+      <p>
+        Churning leaves you with two things: the butter, and the liquid you drain away. This is
+        the liquid.
+      </p>
+      <p>
+        Every item below is a real tool that plenty of good repositories use happily. None of
+        them is here because it is bad. They are poured off because something else in the stack
+        already does that job, and running two things that overlap costs more than picking one
+        and moving on.
+      </p>`),
+};
 
 /**
  * Read before the inclusions by half the audience — it is the fastest way to

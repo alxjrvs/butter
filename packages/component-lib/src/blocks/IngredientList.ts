@@ -1,4 +1,4 @@
-import type { SpecRow } from "@butter/content";
+import type { Ingredient } from "@butter/content";
 import { escapeHtml, type Html, html } from "@butter/core";
 
 /**
@@ -8,7 +8,7 @@ import { escapeHtml, type Html, html } from "@butter/core";
  * only a set of things and their descriptions, and a table would promise
  * columns that mean something.
  */
-export function StackList(rows: readonly SpecRow[]): Html {
+export function IngredientList(rows: readonly Ingredient[]): Html {
   const items = rows
     .map((row) => {
       const version =

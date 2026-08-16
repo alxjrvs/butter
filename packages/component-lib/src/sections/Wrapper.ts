@@ -1,4 +1,4 @@
-import { MASTHEAD, SECTIONS, type VersionKey } from "@butter/content";
+import { SECTIONS, type VersionKey, WRAPPER } from "@butter/content";
 import { escapeHtml, type Html, html } from "@butter/core";
 import { CommandBlock } from "../blocks/CommandBlock.ts";
 import { Version } from "../marks/Version.ts";
@@ -18,8 +18,8 @@ const LABELS: Record<VersionKey, string> = {
  * The contents line is plain links rather than a rail or a numbered index.
  * Eight headings on one page want a way to jump and nothing more than that.
  */
-export function Masthead(): Html {
-  const versions = MASTHEAD.versions
+export function Wrapper(): Html {
+  const versions = WRAPPER.versions
     .map((key) => `<span>${escapeHtml(LABELS[key])} ${Version(key)}</span>`)
     .join("");
 
@@ -29,11 +29,11 @@ export function Masthead(): Html {
   ).join("\n      ");
 
   return html(`  <header class="banner">
-    <p class="name">${escapeHtml(MASTHEAD.name)}</p>
-    <h1>${escapeHtml(MASTHEAD.title)}</h1>
-    <p class="lede">${MASTHEAD.lede}</p>
-    <p class="proof">${escapeHtml(MASTHEAD.proof)}</p>
-    ${CommandBlock(MASTHEAD.commands)}
+    <p class="name">${escapeHtml(WRAPPER.name)}</p>
+    <h1>${escapeHtml(WRAPPER.title)}</h1>
+    <p class="lede">${WRAPPER.lede}</p>
+    <p class="proof">${escapeHtml(WRAPPER.proof)}</p>
+    ${CommandBlock(WRAPPER.commands)}
     <p class="versions">${versions}</p>
   </header>
 

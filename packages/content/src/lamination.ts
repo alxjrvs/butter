@@ -1,5 +1,25 @@
-import { html } from "@butter/core";
+import { type Html, html } from "@butter/core";
 import type { Layer } from "./types.ts";
+
+/** The page calls this "Lamination". */
+export const LAMINATION: {
+  readonly heading: string;
+  readonly deck: string;
+  readonly intro: Html;
+} = {
+  heading: "Lamination",
+  deck: "Eight layers, bottom to top",
+
+  intro: html(`
+      <p>
+        Fold butter into dough, roll it flat, fold it again — and the layers stay separate all
+        the way through the bake. That is the trick this stack is going for: each layer does
+        one job, and it does not leak into the one above it.
+      </p>
+      <p>
+        Summaries below, detail one click down. Nothing here mentions what it replaced.
+      </p>`),
+};
 
 /**
  * The eight layers of the stack, as they stand.
@@ -114,8 +134,10 @@ export const LAYERS: readonly Layer[] = [
     tag: "boom",
     body: html(`
         <p>
-          A gated repo assumes a machine with the tools on it. boom declares that machine in
-          one <code>boomfile.toml</code> and converges to it. Section seven has the commands.
+          A gated repo assumes a machine with the tools on it.
+          <a href="https://github.com/alxjrvs/boom">boom</a> declares that machine in one
+          <code>boomfile.toml</code> and converges to it — packages, dotfiles, secrets and
+          timers — so a fresh laptop arrives able to run the gate.
         </p>`),
   },
 ];

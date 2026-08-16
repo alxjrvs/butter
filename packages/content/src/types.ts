@@ -6,8 +6,8 @@ export type Command = {
   readonly note?: string;
 };
 
-/** One row of the stack list: what it is, what it's for, what version. */
-export type SpecRow = {
+/** One thing that goes into the cream: what it is, what it's for, what version. */
+export type Ingredient = {
   readonly layer: string;
   readonly detail: string;
   readonly version?: string;
@@ -25,9 +25,16 @@ export type Exclusion = {
   readonly reason: Html;
 };
 
-/** A literal excerpt of a file in this repository. */
+/**
+ * A contiguous run of lines quoted from a file in this repository.
+ *
+ * `file` is repo-relative and is what `recipe.test.ts` reads to prove the quote
+ * still matches. It is required, so a snippet cannot be added without also
+ * saying where it came from.
+ */
 export type Snippet = {
   readonly caption: string;
+  readonly file: string;
   readonly source: string;
 };
 
