@@ -20,7 +20,10 @@ export const WRAPPER: {
       "new repo starts in — and the shape this one is in, so nothing below is a sample.",
   ),
 
-  proof: "In production across four monorepos.",
+  // Deliberately unquantified. Counting the repos dated the claim and pointed
+  // at things a reader cannot open; this says the same thing in the tense that
+  // matters and stays true without maintenance.
+  proof: "In production now.",
 
   commands: [
     { cmd: "git clone https://github.com/alxjrvs/butter" },
