@@ -36,6 +36,7 @@ ${declarations(LIGHT)}
 
     --serif: ${TYPE.serif};
     --mono: ${TYPE.mono};
+    --label: ${TYPE.label};
     --measure: 34rem;
   }
 
@@ -238,20 +239,77 @@ const CODE = `
   }
 `;
 
-const LISTS = `
-  .stack { margin: 1.6rem 0 0; }
-  .stack > div { padding: 0.7rem 0; border-top: 1px solid var(--rule); }
-  .stack > div:last-child { border-bottom: 1px solid var(--rule); }
-  .stack dt { margin: 0; font-weight: 700; }
-  .stack dt .v {
+const LABEL = `
+  .namekey { font-size: 1.05rem; }
+  .namekey strong { color: var(--accent-ink); }
+
+  /* A printed panel sitting on the page, not the page dressing up as one. The
+     rule weights are the hierarchy — heavy bar between the name key and
+     everything else, hairlines between rows — which is how a real label carries
+     structure without a legend. */
+  .label {
+    margin: 1.8rem 0 0;
+    padding: 0.7rem 0.9rem 0.9rem;
+    max-width: 25rem;
+    background: var(--label-bg);
+    color: var(--label-ink);
+    border: 3px solid var(--label-ink);
+    font-family: var(--label);
+  }
+  .ltitle {
+    margin: 0;
+    font-size: clamp(1.7rem, 4.6vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 0.95;
+  }
+  .lserving { margin: 0.15rem 0 0; font-size: 0.78rem; }
+  .lserving b { font-weight: 700; }
+
+  /* Not currentColor: the UA stylesheet gives <hr> its own \`color: gray\`, which
+     beats inheritance and turns every rule in the panel grey. */
+  .label hr { border: 0; margin: 0.3rem 0; background: var(--label-ink); }
+  .label hr.hair { height: 1px; }
+  .label hr.mid { height: 5px; }
+  .label hr.thick { height: 9px; }
+
+  .lhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+  .lamount { font-size: 0.72rem; padding-bottom: 0.15rem; }
+  .lv {
+    flex: none;
     font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 400;
-    color: var(--ink-3);
-    padding-left: 0.5rem;
+    font-size: 0.7rem;
     font-variant-numeric: tabular-nums;
   }
-  .stack dd { margin: 0; max-width: var(--measure); color: var(--ink-2); }
+  .lrow { padding: 0.3rem 0; border-bottom: 1px solid var(--label-ink); }
+  .lrow:last-of-type { border-bottom: 0; }
+  .lrow.sub { padding-left: 1rem; }
+  .lrow.sub .lhead { font-weight: 400; }
+  .letter {
+    display: inline-block;
+    min-width: 1rem;
+    font-weight: 800;
+    color: var(--accent-ink);
+  }
+  .ldetail { margin: 0.1rem 0 0; font-size: 0.72rem; line-height: 1.35; }
+  .lrow.sub .ldetail { padding-left: 0; }
+  .lfree {
+    margin: 0.5rem 0 0;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+`;
+
+const LISTS = `
 
   .layers { margin-top: 1.6rem; }
   .layer { padding: 0.75rem 0; border-top: 1px solid var(--rule); }
@@ -286,4 +344,6 @@ const LISTS = `
   .exclusions dd { margin: 0; max-width: var(--measure); color: var(--ink-2); }
 `;
 
-export const styles = [THEME, BASE, BANNER, SECTIONS, CODE, LISTS].join("\n");
+export const styles = [THEME, BASE, BANNER, SECTIONS, CODE, LABEL, LISTS].join(
+  "\n",
+);

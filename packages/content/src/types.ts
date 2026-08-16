@@ -6,7 +6,20 @@ export type Command = {
   readonly note?: string;
 };
 
-/** One thing that goes into the cream: what it is, what it's for, what version. */
+/**
+ * One letter of B·U·T·T·E·R, and the choice it stands for.
+ *
+ * `letter` is required, which is what stops the name key drifting into a list
+ * of favourite tools: an entry has to earn a letter of the name to be in it.
+ */
+export type NameKeyEntry = {
+  readonly letter: string;
+  readonly word: string;
+  readonly detail: string;
+  readonly version?: string;
+};
+
+/** Everything else in the tin. Set as the label's indented sub-entries. */
 export type Ingredient = {
   readonly layer: string;
   readonly detail: string;

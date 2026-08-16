@@ -31,6 +31,10 @@ export type Palette = {
   readonly bannerInk: string;
   readonly bannerInk2: string;
 
+  /** the label's stock — a printed panel sitting on the page */
+  readonly labelBg: string;
+  readonly labelInk: string;
+
   readonly termBg: string;
   readonly termInk: string;
   readonly termDim: string;
@@ -51,6 +55,9 @@ export const LIGHT: Palette = {
   bannerInk: "#14264f",
   bannerInk2: "#3d4a70",
 
+  labelBg: "#fffdf5",
+  labelInk: "#14264f",
+
   termBg: "#14264f",
   termInk: "#f0e8d2",
   termDim: "#93a3c8",
@@ -70,6 +77,9 @@ export const DARK: Palette = {
   bannerBg: "#f5c543",
   bannerInk: "#14264f",
   bannerInk2: "#3d4a70",
+
+  labelBg: "#141d33",
+  labelInk: "#f2ecda",
 
   termBg: "#080d1a",
   termInk: "#eae2cc",
