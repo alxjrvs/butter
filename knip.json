@@ -5,8 +5,9 @@
       "entry": [],
       "project": []
     },
-    "apps/site": {
-      "project": ["src/**/*.ts"]
+    "packages/component-lib": {
+      "entry": ["src/**/*.stories.ts"],
+      "project": ["**/*.ts"]
     }
   }
 }

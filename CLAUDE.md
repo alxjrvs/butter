@@ -4,17 +4,18 @@ This file guides Claude Code (claude.ai/code) when working in this repository.
 
 ## What This Is
 
-`alxjrvs/butter` is the home of **the Butter Stack** — the house stack read out of four
-monorepos that never shared a template. It is two things at once, and the second is the
-point:
+`alxjrvs/butter` is the home of **the Butter Stack**. It is two things at once, and the
+second is the point:
 
-1. **A document.** `apps/site` builds a single static page — the teardown, the conformance
-   matrix, the eight strata, the divergences, the direction of travel — published to
-   <https://alxjrvs.github.io/butter/>.
+1. **A document.** `apps/site` builds a single static page — what the stack is, the eight
+   layers, the aggregate gate, the files, the exclusions, the machine layer — published to
+   <https://alxjrvs.github.io/butter/>. It describes the stack **as it stands**: no survey of
+   how it got here, no conformance percentages, no migrations in flight, no dated caveats.
 2. **An example of itself.** The repo is built on the stack the page describes, so its own
-   config is the reference implementation. A reviewer should be able to read `package.json`,
-   `tsconfig.base.json`, `biome.json`, `lefthook.yml` and `.github/workflows/ci.yml` as the
-   worked answer, with the page as commentary.
+   config and its own package graph are the reference implementation. A reviewer should be
+   able to read `package.json`, `tsconfig.base.json`, `biome.json`, `lefthook.yml`,
+   `.github/workflows/ci.yml` and `packages/*` as the worked answer, with the page as
+   commentary.
 
 That recursion is the constraint that governs changes here: **a change to the page's claims
 that the repo could honor, but doesn't, is a bug.**
@@ -32,19 +33,31 @@ knip.json             per-workspace entry/project globs
 .github/workflows/
   ci.yml              fan-out → ONE always() aggregate gate
   pages.yml           build apps/site → GitHub Pages
-apps/site/            the teardown page
-  src/build.ts        entry: renders the document, writes dist/, asserts base-path safety
-  src/page.ts         the document shell (head, section order, footer)
-  src/styles.ts       the whole stylesheet, inlined at build time
-  src/sections/*.ts   one module per section of the page
+
+packages/             the house graph, bottom-up. Siblings never import siblings.
+  core/               zero-dependency: the Html brand + escapeHtml
+  content/            every string on the page, as typed data. No markup.
+    versions.test.ts  asserts VERSIONS matches the catalog and .bun-version
+  tokens/             framework-agnostic: the two-ink palette + type stacks
+  component-lib/      the ONLY place markup lives
+    src/marks|blocks|sections/   the taxonomy; one story file each
+    src/{document,story,styles}.ts   package infrastructure, no stories
+    .workbench/build.ts          the workbench, in the package
+    story-coverage.test.ts       1 component = 1 story, taxonomy-checked
+apps/
+  site/
+    src/build.ts      entry: renders, writes dist/, asserts base-path safety
+    src/page.ts       section order and nothing else — the app emits no markup
 ```
 
 ## Commands
 
 ```sh
 bun install       # also installs the git hooks via the prepare script
-bun run check     # lint + typecheck + knip + build — the whole gate, locally
+bun run check     # lint + typecheck + knip + test + build — the whole gate, locally
 bun run build     # writes apps/site/dist/index.html
+bun run test      # story coverage + version drift
+bun run workbench # renders every story → packages/component-lib/.workbench/dist
 bun run format    # biome check --write
 ```
 
@@ -78,16 +91,27 @@ reading why is how the property it protects gets lost.
   TypeScript's automatic `@types/*` discovery does not find the symlinked `@types/bun`, and
   every `node:*` import fails to resolve. This is not belt-and-braces; remove it and
   `bun run typecheck` breaks.
-- **Theme tokens have three states and all three are required** (`src/styles.ts`): a bare
+- **Theme tokens have three states and all three are required**
+  (`packages/component-lib/src/styles.ts`, generated from `packages/tokens`): a bare
   `:root` light palette, a `prefers-color-scheme: dark` block guarded as
   `:root:not([data-theme="light"])`, and a `:root[data-theme="dark"]` block so an explicit
   choice wins over a light system preference. A token defined *only* inside the media query
   has no light value at all.
-- **The `<pre>` scaffold block in `sections/distillate.ts` is whitespace-significant** and is
-  written flush to column 0 on purpose. Do not re-indent it to match the surrounding markup.
-- **Prose in `src/sections/` is authored HTML and is not escaped.** `escapeHtml` is for
-  *data* — the matrix cells, the name key. Escaping the prose would double-escape every
-  `<code>` in the document.
+- **`.facts hr` sets `background: var(--panel-ink)`, not `currentColor`.** The UA stylesheet
+  gives `<hr>` its own `color: gray`, which beats inheritance — with `currentColor` every rule
+  in the facts panel renders grey instead of in the panel's ink.
+- **Authored markup vs data is a type, not a convention.** `packages/core` exports an `Html`
+  brand and `html()` is the only way to make one. A component takes `Html` where it emits a
+  value verbatim and `string` where it escapes one, so the old "prose is not escaped, data is"
+  rule is now a compile error rather than a comment. Escaping the prose would double-escape
+  every `<code>` in the document.
+- **`RulerNav` throws on anything but eight sections.** A stick is eight tablespoons and the
+  rail is that scoring, so the count is load-bearing. A ninth section means merging two or
+  dropping the rail — a decision, made at build time rather than drifted into.
+- **Versions are looked up, never typed.** `VERSIONS` in `packages/content` is the only place
+  a version is written for display, `Version` takes a key rather than a string, and
+  `versions.test.ts` asserts every entry against the catalog and `.bun-version`. That is what
+  keeps the page's present tense true after a dependency bump.
 
 ## Deliberately not here
 
@@ -95,12 +119,12 @@ Absence is a decision too. Do not add these back without a reason that has chang
 
 - **No framework and no bundler.** One page of static HTML needs neither, and the repo is
   more convincing as an example of the stack when it is not over-built.
-- **No `packages/*` workspace.** The root `package.json` declares the glob because that is the
-  house shape, but inventing a package to fill it would be ceremony. Add one when something
-  real needs to be shared.
+- **No framework in the workbench.** Ladle and Storybook both want a bundler and a framework.
+  The stack's claim is that the workbench lives *in* the package, not that it is Storybook, so
+  `.workbench/build.ts` renders every story to one static page in about forty lines.
 - **No `changes` / `dorny/paths-filter` job in CI.** The full stack's CI topology is
   filter → fan out → gate; with one app there is nothing to filter, so the middle step would
   be decoration. The gate is written as though jobs *can* be skipped anyway.
-- **No tests.** There is no behavior to test beyond "the page builds", which `build` already
-  proves, plus the base-path assertion it carries. Add `bun:test` the moment there is logic
-  worth asserting — and add the job to `needs:`.
+- **No tests of rendered markup.** The two test files assert *rules* — every component has a
+  story in the right tier, every printed version matches the manifest. Snapshotting the HTML
+  would make every copy edit a two-file change and would assert nothing the build doesn't.

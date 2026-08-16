@@ -20,5 +20,7 @@ pre-push:
   commands:
     typecheck:
       run: bun run typecheck
+    test:
+      run: bun test
     build:
       run: bun run build
