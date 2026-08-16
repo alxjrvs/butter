@@ -10,7 +10,6 @@ import type { Layer } from "./types.ts";
  */
 export const LAYERS: readonly Layer[] = [
   {
-    n: "01",
     title: "Runtime",
     tag: "bun, end to end",
     body: html(`
@@ -23,7 +22,6 @@ export const LAYERS: readonly Layer[] = [
         </p>`),
   },
   {
-    n: "02",
     title: "Layout",
     tag: "apps/* + packages/*",
     body: html(`
@@ -41,7 +39,6 @@ export const LAYERS: readonly Layer[] = [
         </p>`),
   },
   {
-    n: "03",
     title: "Language",
     tag: "strict, plus five",
     body: html(`
@@ -61,7 +58,6 @@ export const LAYERS: readonly Layer[] = [
         </p>`),
   },
   {
-    n: "04",
     title: "Gates",
     tag: "biome · lefthook · knip",
     body: html(`
@@ -78,7 +74,6 @@ export const LAYERS: readonly Layer[] = [
         </p>`),
   },
   {
-    n: "05",
     title: "CI",
     tag: "one required check",
     body: html(`
@@ -90,7 +85,6 @@ export const LAYERS: readonly Layer[] = [
         </p>`),
   },
   {
-    n: "06",
     title: "UI",
     tag: "react 19 · tanstack",
     body: html(`
@@ -107,7 +101,6 @@ export const LAYERS: readonly Layer[] = [
         </p>`),
   },
   {
-    n: "07",
     title: "Platform",
     tag: "netlify · render · convex",
     body: html(`
@@ -117,7 +110,6 @@ export const LAYERS: readonly Layer[] = [
         </p>`),
   },
   {
-    n: "08",
     title: "Machine",
     tag: "boom",
     body: html(`

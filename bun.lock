@@ -16,7 +16,6 @@
       "name": "@butter/site",
       "dependencies": {
         "@butter/component-lib": "workspace:*",
-        "@butter/content": "workspace:*",
         "@butter/core": "workspace:*",
       },
       "devDependencies": {

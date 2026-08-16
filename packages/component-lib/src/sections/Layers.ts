@@ -3,12 +3,10 @@ import { type Html, html } from "@butter/core";
 import { LayerList } from "../blocks/LayerList.ts";
 import { SectionShell } from "../blocks/SectionShell.ts";
 
-/** Tablespoon three: the spec proper. */
+/** The spec proper. */
 export function Layers(): Html {
   return SectionShell({
     id: "layers",
-    tbsp: 3,
-    label: "Layers",
     heading: "Eight layers",
     body: html(`    <div class="prose">
       <p class="lede">

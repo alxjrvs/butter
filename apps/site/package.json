@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@butter/component-lib": "workspace:*",
-    "@butter/content": "workspace:*",
     "@butter/core": "workspace:*"
   },
   "devDependencies": {

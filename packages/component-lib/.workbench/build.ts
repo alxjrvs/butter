@@ -1,6 +1,5 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { SECTIONS } from "@butter/content";
 import { escapeHtml, html } from "@butter/core";
 import { Glob } from "bun";
 import { Document } from "../src/document.ts";
@@ -13,14 +12,13 @@ import { type StoryModule, TIERS, type Tier } from "../src/story.ts";
  * The stack says the workbench lives *in* the package. It does not say the
  * workbench is Storybook — and Ladle and Storybook both want a bundler and a
  * framework, neither of which this repository has by decision. So this renders
- * every story into one static gallery page using the same components the site
- * does, which is forty lines and no new dependencies.
+ * every story into one static page using the same document shell the site
+ * does, in about forty lines and no new dependencies.
  *
  *   bun run --filter '@butter/component-lib' workbench
  */
 
-const root = join(import.meta.dir, "..");
-const src = join(root, "src");
+const src = join(import.meta.dir, "..", "src");
 const outDir = join(import.meta.dir, "dist");
 
 type Loaded = { readonly tier: Tier; readonly module: StoryModule };
@@ -51,21 +49,18 @@ function renderTier(tier: Tier): string {
     .map((entry) => {
       const stories = entry.module.stories
         .map(
-          (story) => `      <p class="sec-label">${escapeHtml(story.name)}</p>
-      <div class="workbench-render">${story.render()}</div>`,
+          (story) => `      <p class="story-name">${escapeHtml(story.name)}</p>
+      ${story.render()}`,
         )
         .join("\n");
 
-      return `    <div class="workbench-entry">
-      <h3>${escapeHtml(entry.module.component)}</h3>
-${stories}
-    </div>`;
+      return `    <h3>${escapeHtml(entry.module.component)}</h3>
+${stories}`;
     })
     .join("\n");
 
   return `  <section id="${tier}">
-    <p class="sec-label"><span>${escapeHtml(tier)}</span>${String(entries.length)} components</p>
-    <h2>${escapeHtml(tier)}</h2>
+    <h2>${escapeHtml(tier)} — ${String(entries.length)}</h2>
 ${bodies}
   </section>`;
 }
@@ -75,13 +70,13 @@ const body = TIERS.map(renderTier)
   .join("\n\n");
 
 const page = Document({
-  title: "Butter — component workbench",
+  title: "butter — component workbench",
   description:
     "Every component in @butter/component-lib, rendered from its stories.",
-  sections: SECTIONS,
-  body: html(`  <header class="wrapper">
-    <p class="band"><span>Workbench</span><span>@butter/component-lib</span><span>${String(loaded.length)} components</span></p>
-    <h1>Component workbench</h1>
+  body: html(`  <header class="banner">
+    <p class="name">workbench</p>
+    <h1>@butter/component-lib</h1>
+    <p class="lede">${String(loaded.length)} components, rendered from their stories.</p>
   </header>
 
 ${body}`),

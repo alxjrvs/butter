@@ -1,8 +1,6 @@
-import { MASTHEAD, type VersionKey } from "@butter/content";
-import { escapeHtml, type Html, html, joinHtml } from "@butter/core";
+import { MASTHEAD, SECTIONS, type VersionKey } from "@butter/content";
+import { escapeHtml, type Html, html } from "@butter/core";
 import { CommandBlock } from "../blocks/CommandBlock.ts";
-import { Band } from "../marks/Band.ts";
-import { Glyph } from "../marks/Glyph.ts";
 import { Version } from "../marks/Version.ts";
 
 const LABELS: Record<VersionKey, string> = {
@@ -14,28 +12,32 @@ const LABELS: Record<VersionKey, string> = {
 };
 
 /**
- * The wrapper: the face of the stick, printed in one ink.
+ * The one large field of butter on the page: name, claim, what it is, and
+ * three commands that run.
  *
- * Three commands, all of which run against the repository as it stands. The
- * third demonstrates the thesis in one line, which is cheaper than a paragraph
- * claiming it.
+ * The contents line is plain links rather than a rail or a numbered index.
+ * Eight headings on one page want a way to jump and nothing more than that.
  */
 export function Masthead(): Html {
-  const glyphs = joinHtml(MASTHEAD.glyphs.map(Glyph), "");
-
   const versions = MASTHEAD.versions
     .map((key) => `<span>${escapeHtml(LABELS[key])} ${Version(key)}</span>`)
     .join("");
 
-  return html(`  <header class="wrapper">
-    ${Band(["Sweet cream", "Grade AA", "Net wt 4 oz"])}
+  const contents = SECTIONS.map(
+    (section) =>
+      `<a href="#${escapeHtml(section.id)}">${escapeHtml(section.label)}</a>`,
+  ).join("\n      ");
+
+  return html(`  <header class="banner">
+    <p class="name">${escapeHtml(MASTHEAD.name)}</p>
     <h1>${escapeHtml(MASTHEAD.title)}</h1>
-    <div class="glyphs">${glyphs}</div>
-    <div class="wrapper-lede">
-      <p>${MASTHEAD.lede}</p>
-      <p class="proof">${escapeHtml(MASTHEAD.proof)}</p>
-    </div>
+    <p class="lede">${MASTHEAD.lede}</p>
+    <p class="proof">${escapeHtml(MASTHEAD.proof)}</p>
     ${CommandBlock(MASTHEAD.commands)}
-    <p class="wrapper-versions">${versions}</p>
-  </header>`);
+    <p class="versions">${versions}</p>
+  </header>
+
+  <nav class="contents" aria-label="Contents">
+      ${contents}
+  </nav>`);
 }

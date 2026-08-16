@@ -3,37 +3,11 @@ import type { Command } from "./types.ts";
 
 export const START: {
   readonly heading: string;
-  readonly contains: readonly string[];
-  readonly free: readonly string[];
   readonly tree: string;
   readonly body: Html;
   readonly commands: readonly Command[];
 } = {
   heading: "Start here",
-
-  contains: [
-    "Bun workspaces (apps/*, packages/*)",
-    "bunfig.toml",
-    "version catalog",
-    // No flag names here. The list is set in caps, which is right for an
-    // ingredient panel and wrong for camelCase identifiers — they are legible
-    // in the tsconfig snippet in section five, and unreadable here.
-    "TypeScript strict-plus",
-    "Biome",
-    "Lefthook",
-    "Knip",
-    "one aggregate CI gate",
-    "CLAUDE.md",
-    "React 19",
-    "TanStack Router + Query",
-    "tokens",
-    "component library",
-    "Netlify",
-    "Render",
-    "Convex",
-  ],
-
-  free: ["Prettier", "Turbo", "Nx", "CSS Modules"],
 
   tree: `package.json         private · workspaces · catalog · the script surface
 bunfig.toml          linker = "isolated" · exact = true

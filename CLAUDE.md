@@ -38,7 +38,7 @@ packages/             the house graph, bottom-up. Siblings never import siblings
   core/               zero-dependency: the Html brand + escapeHtml
   content/            every string on the page, as typed data. No markup.
     versions.test.ts  asserts VERSIONS matches the catalog and .bun-version
-  tokens/             framework-agnostic: the two-ink palette + type stacks
+  tokens/             framework-agnostic: the two-ink palette + two type stacks
   component-lib/      the ONLY place markup lives
     src/marks|blocks|sections/   the taxonomy; one story file each
     src/{document,story,styles}.ts   package infrastructure, no stories
@@ -97,17 +97,18 @@ reading why is how the property it protects gets lost.
   `:root:not([data-theme="light"])`, and a `:root[data-theme="dark"]` block so an explicit
   choice wins over a light system preference. A token defined *only* inside the media query
   has no light value at all.
-- **`.facts hr` sets `background: var(--panel-ink)`, not `currentColor`.** The UA stylesheet
-  gives `<hr>` its own `color: gray`, which beats inheritance — with `currentColor` every rule
-  in the facts panel renders grey instead of in the panel's ink.
+- **`.banner` centres with a grid column, not `margin: auto`.** Each banner child sets its own
+  `margin`, and a margin shorthand on a more specific selector silently wins over the auto
+  centring — which is how the header stops lining up with the sections below it. The column is
+  `46rem` minus the banner's own padding so the two agree.
 - **Authored markup vs data is a type, not a convention.** `packages/core` exports an `Html`
   brand and `html()` is the only way to make one. A component takes `Html` where it emits a
   value verbatim and `string` where it escapes one, so the old "prose is not escaped, data is"
   rule is now a compile error rather than a comment. Escaping the prose would double-escape
   every `<code>` in the document.
-- **`RulerNav` throws on anything but eight sections.** A stick is eight tablespoons and the
-  rail is that scoring, so the count is load-bearing. A ninth section means merging two or
-  dropping the rail — a decision, made at build time rather than drifted into.
+- **Yellow appears once, at the top.** One field of butter and then paper the rest of the way.
+  A second yellow panel further down turns it into a pattern and costs the first one its
+  emphasis — the earlier draft wrapped every element in the packaging and read as costume.
 - **Versions are looked up, never typed.** `VERSIONS` in `packages/content` is the only place
   a version is written for display, `Version` takes a key rather than a string, and
   `versions.test.ts` asserts every entry against the catalog and `.bun-version`. That is what

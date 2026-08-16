@@ -1,2 +1,2 @@
-export { DARK, LIGHT, type Palette, type TokenName } from "./src/palette.ts";
+export { DARK, LIGHT, type Palette } from "./src/palette.ts";
 export { TYPE } from "./src/type.ts";

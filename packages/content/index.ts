@@ -11,11 +11,9 @@ export { THESIS } from "./src/thesis.ts";
 export type {
   Command,
   Exclusion,
-  Glyph,
   Layer,
   SectionRef,
   Snippet,
-  SpecGroup,
   SpecRow,
 } from "./src/types.ts";
 export { VERSIONS, type VersionKey } from "./src/versions.ts";

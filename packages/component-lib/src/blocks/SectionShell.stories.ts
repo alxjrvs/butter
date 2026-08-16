@@ -11,9 +11,7 @@ export const story: StoryModule = {
       render: () =>
         SectionShell({
           id: "example",
-          tbsp: 3,
-          label: "Layers",
-          heading: "Eight layers",
+          heading: "The layers",
           body: html('<div class="prose"><p>Body goes here.</p></div>'),
         }),
     },
