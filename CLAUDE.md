@@ -36,10 +36,11 @@ knip.json             per-workspace entry/project globs
 
 packages/             the house graph, bottom-up. Siblings never import siblings.
   core/               zero-dependency: the Html brand + escapeHtml
-  content/            every string on the page, as typed data. No markup.
+  content/            every string on the page, as typed data + its inline prose markup
     versions.test.ts  asserts VERSIONS matches the catalog and .bun-version
+    recipe.test.ts    asserts every quoted snippet still matches its file
   tokens/             framework-agnostic: the two-ink palette + two type stacks
-  component-lib/      the ONLY place markup lives
+  component-lib/      the ONLY place page STRUCTURE is built
     src/marks|blocks|sections/   the taxonomy; one story file each
     src/{document,story,styles}.ts   package infrastructure, no stories
     .workbench/build.ts          the workbench, in the package

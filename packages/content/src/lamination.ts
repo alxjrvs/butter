@@ -134,8 +134,10 @@ export const LAYERS: readonly Layer[] = [
     tag: "boom",
     body: html(`
         <p>
-          A gated repo assumes a machine with the tools on it. boom declares that machine in
-          one <code>boomfile.toml</code> and converges to it. Section seven has the commands.
+          A gated repo assumes a machine with the tools on it.
+          <a href="https://github.com/alxjrvs/boom">boom</a> declares that machine in one
+          <code>boomfile.toml</code> and converges to it — packages, dotfiles, secrets and
+          timers — so a fresh laptop arrives able to run the gate.
         </p>`),
   },
 ];

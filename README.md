@@ -21,17 +21,18 @@ bun run workbench   # → packages/component-lib/.workbench/dist/index.html
 
 ## The graph
 
-The site is built the way the stack says to build one: content is data, markup lives in
-exactly one package, and both of those are checked rather than asked for.
+The site is built the way the stack says to build one: content is data, the page's structure
+is built in exactly one package, and both of those are checked rather than asked for.
 
 ```
 packages/core            the Html brand + escapeHtml. Zero dependencies.
-packages/content         every string on the page, typed. No markup.
+packages/content         every string on the page, typed. No page structure.
 packages/tokens          the two-ink palette and the type stacks.
-packages/component-lib   the only place markup lives. marks / blocks / sections.
+packages/component-lib   builds every section, list and panel. marks / blocks / sections.
 apps/site                composes them. Emits no markup of its own.
 ```
 
-Two tests hold it together: `story-coverage.test.ts` fails when a component has no story or
-sits in the wrong tier, and `versions.test.ts` fails when a version printed on the page stops
-matching the one the repo installs.
+Three tests hold it together. `story-coverage.test.ts` fails when a component has no story or
+sits in the wrong tier. `versions.test.ts` fails when a version printed on the page stops
+matching the one the repo installs. `recipe.test.ts` fails when a config snippet on the page
+stops matching the file it was quoted from.

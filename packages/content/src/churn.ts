@@ -44,8 +44,13 @@ export const CHURN: {
       </ul>
       <p>
         The rule that falls out of it is the one worth stealing even if you take nothing else:
-        <strong>anything you would otherwise write as a convention in <code>CLAUDE.md</code>
-        should become a <code>check:*</code> script wired into the gate.</strong> If it cannot
-        be, it probably was not a convention. It was a preference.
+        <strong>anything you would otherwise write as a convention should instead become a
+        check the gate runs.</strong> If it cannot be, it probably was not a convention. It was
+        a preference.
+      </p>
+      <p>
+        This repository holds itself to that. "Every component has a story" and "every version
+        on the page matches the one we install" are both conventions somebody could have
+        written down and hoped for. They are test files instead, and they fail the build.
       </p>`),
 };

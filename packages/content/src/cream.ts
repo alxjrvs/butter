@@ -64,7 +64,9 @@ export const INGREDIENTS: readonly Ingredient[] = [
     version: VERSIONS.knip,
   },
   { layer: "GitHub Actions", detail: "fan out, then one required check" },
-  { layer: "React", detail: "with TanStack Router and Query", version: "19" },
+  // No version: this repo installs no React, so nothing could check the number
+  // and "every version here is looked up" would stop being true.
+  { layer: "React", detail: "19, with TanStack Router and Query" },
   { layer: "Component library", detail: "tokens, style objects, a story gate" },
   { layer: "Netlify · Render · Convex", detail: "web, workers, backend" },
 ];

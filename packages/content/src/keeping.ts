@@ -26,13 +26,16 @@ export const KEEPING: {
           dependency without updating the content and CI goes red.
         </li>
         <li>
-          <strong>Every snippet is a literal excerpt</strong> of a file in this repository, not
-          a tidied-up retelling of one.
+          <strong>The page's structure comes from one package.</strong> Every section, list and
+          panel is a component, and a story-coverage test fails when one has no story, sits in
+          the wrong tier, or leaves a story behind after it is deleted. Prose keeps the inline
+          markup prose needs — a <code>&lt;code&gt;</code> here, a link there — and that is the
+          seam between the two packages rather than a rule being bent.
         </li>
         <li>
-          <strong>Markup lives in exactly one package</strong>, and a story-coverage test fails
-          when a component has no story, or sits in the wrong tier, or has a story left behind
-          after the component was deleted.
+          <strong>Every snippet is checked against the file it quotes.</strong> A config gains a
+          command, the page keeps showing the old one, CI goes red. That one is here because the
+          page had already drifted before anybody noticed.
         </li>
         <li>
           <strong>Prose versus data is a type.</strong> Authored markup is a branded

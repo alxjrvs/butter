@@ -24,6 +24,7 @@ export const HANDLE: {
 
   snippet: {
     caption: ".github/workflows/ci.yml",
+    file: ".github/workflows/ci.yml",
     source: `CI-Success:
   name: CI Success
   if: always()
