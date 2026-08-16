@@ -4,7 +4,7 @@ import { ExclusionList } from "../blocks/ExclusionList.ts";
 import { SectionShell } from "../blocks/SectionShell.ts";
 
 /** "Buttermilk" on the page: what the churn drains off. */
-export function Exclusions(): Html {
+export function Buttermilk(): Html {
   return SectionShell({
     id: "buttermilk",
     heading: BUTTERMILK.heading,

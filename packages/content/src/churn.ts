@@ -1,7 +1,7 @@
 import { type Html, html } from "@butter/core";
 
 /** The page calls this "The churn". It is the argument the whole stack rests on. */
-export const THESIS: {
+export const CHURN: {
   readonly heading: string;
   readonly deck: string;
   readonly body: Html;

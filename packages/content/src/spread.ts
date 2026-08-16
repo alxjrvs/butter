@@ -6,7 +6,7 @@ import type { Command } from "./types.ts";
  * retrofitting are different jobs and the second one is the harder and more
  * common of the two.
  */
-export const START: {
+export const SPREAD: {
   readonly heading: string;
   readonly deck: string;
   readonly intro: Html;

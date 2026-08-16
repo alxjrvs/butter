@@ -5,7 +5,7 @@ import type { Snippet } from "./types.ts";
  * Every snippet is a literal excerpt of a file in this repository, quoted so a
  * reader can diff the page against the tree it describes.
  */
-export const FILES: {
+export const RECIPE: {
   readonly heading: string;
   readonly deck: string;
   readonly intro: Html;

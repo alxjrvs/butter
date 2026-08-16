@@ -6,8 +6,8 @@ export type Command = {
   readonly note?: string;
 };
 
-/** One row of the stack list: what it is, what it's for, what version. */
-export type SpecRow = {
+/** One thing that goes into the cream: what it is, what it's for, what version. */
+export type Ingredient = {
   readonly layer: string;
   readonly detail: string;
   readonly version?: string;

@@ -4,7 +4,7 @@ import { LayerList } from "../blocks/LayerList.ts";
 import { SectionShell } from "../blocks/SectionShell.ts";
 
 /** "Lamination" on the page: the eight layers, summaries with detail on click. */
-export function Layers(): Html {
+export function Lamination(): Html {
   return SectionShell({
     id: "lamination",
     heading: LAMINATION.heading,

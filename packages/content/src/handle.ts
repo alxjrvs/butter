@@ -1,7 +1,7 @@
 import { type Html, html } from "@butter/core";
 import type { Snippet } from "./types.ts";
 
-export const GATE: {
+export const HANDLE: {
   readonly heading: string;
   readonly deck: string;
   readonly intro: Html;

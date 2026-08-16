@@ -2,7 +2,7 @@ import { type Html, html } from "@butter/core";
 import type { Command } from "./types.ts";
 import type { VersionKey } from "./versions.ts";
 
-export const MASTHEAD: {
+export const WRAPPER: {
   readonly name: string;
   readonly title: string;
   readonly lede: Html;
