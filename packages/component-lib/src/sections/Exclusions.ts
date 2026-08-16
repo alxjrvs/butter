@@ -1,18 +1,15 @@
-import { EXCLUSIONS } from "@butter/content";
+import { BUTTERMILK, EXCLUSIONS } from "@butter/content";
 import { type Html, html } from "@butter/core";
 import { ExclusionList } from "../blocks/ExclusionList.ts";
 import { SectionShell } from "../blocks/SectionShell.ts";
 
-/** Read before the inclusions by half the audience. */
+/** "Buttermilk" on the page: what the churn drains off. */
 export function Exclusions(): Html {
   return SectionShell({
-    id: "exclusions",
-    heading: "Not in the stack",
-    body: html(`    <div class="prose">
-      <p class="lede">
-        The fastest way to find out whether a stack shares your priors. Every reason below
-        carries a mechanism rather than a preference.
-      </p>
+    id: "buttermilk",
+    heading: BUTTERMILK.heading,
+    deck: BUTTERMILK.deck,
+    body: html(`    <div class="prose">${BUTTERMILK.intro}
     </div>
 ${ExclusionList(EXCLUSIONS)}`),
   });

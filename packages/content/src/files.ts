@@ -7,15 +7,21 @@ import type { Snippet } from "./types.ts";
  */
 export const FILES: {
   readonly heading: string;
+  readonly deck: string;
   readonly intro: Html;
   readonly snippets: readonly Snippet[];
 } = {
-  heading: "Five files and a workflow",
+  heading: "The recipe",
+  deck: "Every config file, in full",
 
   intro: html(`
       <p>
-        These are the files, not a description of them. Each one is short on purpose: a config
-        that carries only its divergences from a tool's defaults is a config that gets read.
+        No abbreviating and no "and so on" — these are the files exactly as they sit in the
+        repository, so you can diff the page against the tree it claims to describe.
+      </p>
+      <p>
+        Each one is short on purpose. A config that carries only its divergences from a tool's
+        defaults is a config somebody actually reads, and every line in it means something.
       </p>`),
 
   snippets: [

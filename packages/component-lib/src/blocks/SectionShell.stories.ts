@@ -7,11 +7,12 @@ export const story: StoryModule = {
   component: "SectionShell",
   stories: [
     {
-      name: "chrome only",
+      name: "heading and deck",
       render: () =>
         SectionShell({
           id: "example",
-          heading: "The layers",
+          heading: "Buttermilk",
+          deck: "What gets poured off",
           body: html('<div class="prose"><p>Body goes here.</p></div>'),
         }),
     },

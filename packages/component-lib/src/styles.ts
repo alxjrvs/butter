@@ -75,6 +75,29 @@ const BASE = `
   .prose p { margin: 0 0 1rem; }
   .prose p:last-child { margin-bottom: 0; }
   .prose .lede { color: var(--ink-2); }
+
+  /* The page's headings are butter — Cream, The churn, Buttermilk. The deck is
+     the plain line under each one that says what the section actually is, so a
+     reader scanning for CI can still find it. */
+  .deck {
+    margin: -0.7rem 0 1.4rem;
+    max-width: var(--measure);
+    font-size: 1.02rem;
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .prose h3 {
+    margin: 2rem 0 0.8rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent-ink);
+  }
+  .prose ul, .prose ol { margin: 0 0 1rem; padding-left: 1.4rem; }
+  .prose li { margin-bottom: 0.5rem; }
+  .prose li:last-child { margin-bottom: 0; }
+  .prose ol { padding-left: 1.6rem; }
+  .prose ol li::marker { font-variant-numeric: tabular-nums; color: var(--ink-3); }
 `;
 
 /**

@@ -1,17 +1,20 @@
 import { START } from "@butter/content";
 import { type Html, html } from "@butter/core";
-import { CodeBlock } from "../blocks/CodeBlock.ts";
 import { CommandBlock } from "../blocks/CommandBlock.ts";
 import { SectionShell } from "../blocks/SectionShell.ts";
 
-/** The page closes on an action rather than a caveat. */
+/** "Spread it" on the page: the two onboarding routes. */
 export function Start(): Html {
   return SectionShell({
-    id: "start",
+    id: "spread",
     heading: START.heading,
-    body: html(`${CodeBlock({ caption: "the scaffold", source: START.tree })}
-    <div class="prose">${START.body}
+    deck: START.deck,
+    body: html(`    <div class="prose">${START.intro}
+      <h3>${START.freshHeading}</h3>${START.freshIntro}
     </div>
-${CommandBlock(START.commands)}`),
+${CommandBlock(START.freshCommands)}
+    <div class="prose">${START.freshBody}
+      <h3>${START.existingHeading}</h3>${START.existingBody}
+    </div>`),
   });
 }

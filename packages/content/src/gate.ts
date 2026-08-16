@@ -3,16 +3,23 @@ import type { Snippet } from "./types.ts";
 
 export const GATE: {
   readonly heading: string;
+  readonly deck: string;
   readonly intro: Html;
   readonly snippet: Snippet;
   readonly body: Html;
 } = {
-  heading: "The gate, and the two ways to get it wrong",
+  heading: "One handle",
+  deck: "The aggregate CI gate, and the two ways to get it wrong",
 
   intro: html(`
       <p>
-        One job is the required check. Every other job reports into it, so branch protection is
-        never edited when a job is added or skipped.
+        A churn has one crank. You turn it, and either the butter comes or it does not — there
+        is no partial credit and nothing else to go and check.
+      </p>
+      <p>
+        CI works the same way here. Jobs fan out as wide as you like, and exactly one of them is
+        what branch protection requires. Add a job, and branch protection never has to be
+        touched again.
       </p>`),
 
   snippet: {
@@ -29,6 +36,11 @@ export const GATE: {
   },
 
   body: html(`
+      <p>
+        Which brings us to the two ways this goes wrong. Both of them look completely fine in
+        review, and both of them fail silently rather than loudly, which is the worst way for a
+        gate to fail.
+      </p>
       <p>
         <code>if: always()</code> makes the job <em>run</em> regardless of how its dependencies
         finished. It does not make it <em>fail</em> with them. Without that last step the job

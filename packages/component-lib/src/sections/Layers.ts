@@ -1,18 +1,15 @@
-import { LAYERS } from "@butter/content";
+import { LAMINATION, LAYERS } from "@butter/content";
 import { type Html, html } from "@butter/core";
 import { LayerList } from "../blocks/LayerList.ts";
 import { SectionShell } from "../blocks/SectionShell.ts";
 
-/** The spec proper. */
+/** "Lamination" on the page: the eight layers, summaries with detail on click. */
 export function Layers(): Html {
   return SectionShell({
-    id: "layers",
-    heading: "Eight layers",
-    body: html(`    <div class="prose">
-      <p class="lede">
-        Bottom to top. Each layer names the choice and the reason for it; the detail is one
-        click down, so the summary reads as a spine rather than a wall.
-      </p>
+    id: "lamination",
+    heading: LAMINATION.heading,
+    deck: LAMINATION.deck,
+    body: html(`    <div class="prose">${LAMINATION.intro}
     </div>
 ${LayerList(LAYERS)}`),
   });

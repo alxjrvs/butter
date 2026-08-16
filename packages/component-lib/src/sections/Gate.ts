@@ -4,15 +4,16 @@ import { CodeBlock } from "../blocks/CodeBlock.ts";
 import { SectionShell } from "../blocks/SectionShell.ts";
 
 /**
- * The one config on the page worth arriving for.
+ * "One handle" on the page: the one config worth arriving for.
  *
  * Its own section and its own anchor, because it is specific, reproducible,
  * and a mistake that ships silently in a lot of repositories.
  */
 export function Gate(): Html {
   return SectionShell({
-    id: "gate",
+    id: "handle",
     heading: GATE.heading,
+    deck: GATE.deck,
     body: html(`    <div class="prose">${GATE.intro}
     </div>
 ${CodeBlock(GATE.snippet)}

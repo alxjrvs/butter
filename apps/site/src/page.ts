@@ -3,8 +3,8 @@ import {
   Exclusions,
   Files,
   Gate,
+  Keeping,
   Layers,
-  Machine,
   Masthead,
   Stack,
   Start,
@@ -16,14 +16,16 @@ const TITLE = "butter — the agentic dev stack that's smooth as butter";
 
 const DESCRIPTION =
   "A house stack for TypeScript monorepos: Bun end to end, TypeScript five " +
-  "flags past strict, Biome for lint and format, and one required check in CI.";
+  "flags past strict, Biome, Knip and Lefthook, and one required check in CI.";
 
 /**
  * The app composes and emits no markup of its own.
  *
  * Every tag in the built page comes from `@butter/component-lib` and every
  * string from `@butter/content`. The order below is the whole of this file's
- * opinion.
+ * opinion: what it is, why it's shaped that way, and how to start — before any
+ * of the depth, so a reader who is sold can act without scrolling past the
+ * config to do it.
  */
 export function renderPage(): string {
   const footer = html(`  <footer>
@@ -42,12 +44,12 @@ export function renderPage(): string {
         Masthead(),
         Stack(),
         Thesis(),
-        Layers(),
-        Gate(),
-        Files(),
-        Exclusions(),
-        Machine(),
         Start(),
+        Gate(),
+        Layers(),
+        Exclusions(),
+        Files(),
+        Keeping(),
         footer,
       ],
       "\n\n",
