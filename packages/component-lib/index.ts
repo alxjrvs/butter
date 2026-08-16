@@ -1,8 +1,11 @@
 export { CodeBlock } from "./src/blocks/CodeBlock.ts";
 export { CommandBlock } from "./src/blocks/CommandBlock.ts";
 export { ExclusionList } from "./src/blocks/ExclusionList.ts";
-export { IngredientList } from "./src/blocks/IngredientList.ts";
 export { LayerList } from "./src/blocks/LayerList.ts";
+export {
+  NutritionLabel,
+  type NutritionLabelProps,
+} from "./src/blocks/NutritionLabel.ts";
 export {
   SectionShell,
   type SectionShellProps,

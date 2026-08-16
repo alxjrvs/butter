@@ -1,6 +1,6 @@
 export { BUTTERMILK, EXCLUSIONS } from "./src/buttermilk.ts";
 export { CHURN } from "./src/churn.ts";
-export { CREAM, INGREDIENTS } from "./src/cream.ts";
+export { ALSO_INSIDE, CREAM, FREE_FROM, NAME_KEY } from "./src/cream.ts";
 export { HANDLE } from "./src/handle.ts";
 export { KEEPING } from "./src/keeping.ts";
 export { LAMINATION, LAYERS } from "./src/lamination.ts";
@@ -12,6 +12,7 @@ export type {
   Exclusion,
   Ingredient,
   Layer,
+  NameKeyEntry,
   SectionRef,
   Snippet,
 } from "./src/types.ts";

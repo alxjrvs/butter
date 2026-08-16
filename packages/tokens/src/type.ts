@@ -17,4 +17,11 @@ export const TYPE = {
     '"Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", ' +
     'Georgia, "Liberation Serif", serif',
   mono: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
+  /**
+   * Nutrition labels are set in Helvetica. Borrowing the face is most of what
+   * makes the panel read as a label rather than a styled table, and confining
+   * it to that one object keeps it a quoted artifact instead of a third voice
+   * running loose through the page.
+   */
+  label: '"Helvetica Neue", Helvetica, Arial, sans-serif',
 } as const;

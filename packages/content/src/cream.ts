@@ -1,5 +1,5 @@
 import { type Html, html } from "@butter/core";
-import type { Ingredient } from "./types.ts";
+import type { Ingredient, NameKeyEntry } from "./types.ts";
 import { VERSIONS } from "./versions.ts";
 
 export const CREAM: {
@@ -9,17 +9,28 @@ export const CREAM: {
   readonly outro: Html;
 } = {
   heading: "Cream",
-  deck: "What goes in",
+  deck: "What goes in, and what the name stands for",
 
   intro: html(`
       <p>
-        Good butter is mostly a question of good cream. Nothing on this list is exotic, and
-        that is deliberate — every piece is something you would probably reach for anyway.
+        It is called butter because it goes on the Bun. It is also an acronym, and the six
+        letters are the six decisions that matter most:
+      </p>
+      <p class="namekey">
+        <strong>B</strong>un · <strong>U</strong>nified workspace ·
+        <strong>T</strong>ypeScript · <strong>T</strong>anStack ·
+        <strong>E</strong>dge-deployed · <strong>R</strong>eact
       </p>
       <p>
-        The value is not in any single choice. It is in having made all of them once, together,
-        so that a new repository starts out already decided. No week of picking a formatter.
-        No third opinion about path aliases.
+        Those are the bold lines on the label below. Everything indented under them is what
+        comes along for the ride — the tools that make the six work together rather than merely
+        coexist.
+      </p>
+      <p>
+        Nothing on the label is exotic, and that is deliberate. Every piece is something you
+        would probably reach for anyway. The value is not in any single choice; it is in having
+        made all of them once, together, so a new repository starts out already decided. No
+        week of picking a formatter. No third opinion about path aliases.
       </p>`),
 
   outro: html(`
@@ -31,23 +42,49 @@ export const CREAM: {
 };
 
 /**
- * What goes in the churn.
+ * B·U·T·T·E·R — the six letters, and the choice each one stands for.
  *
- * One row per layer: what it is, what it's for, and the version where there is
- * one. No proportions, no trends, no dates, so nothing here expires on its own.
- * An em dash means the layer has no pinned version, not that it is missing.
+ * These render as the bold lines of the label, which is what makes the acronym
+ * an explanation rather than a mnemonic. A reader gets the name and the stack
+ * in the same glance.
  */
-export const INGREDIENTS: readonly Ingredient[] = [
+export const NAME_KEY: readonly NameKeyEntry[] = [
   {
-    layer: "Bun",
+    letter: "B",
+    word: "Bun",
     detail: "runtime, package manager, workspaces, tests, scripts",
     version: VERSIONS.bun,
   },
   {
-    layer: "TypeScript",
-    detail: "one base config, five flags past strict",
+    letter: "U",
+    word: "Unified workspace",
+    detail: "apps/* for what you deploy, packages/* for what they share",
+  },
+  {
+    letter: "T",
+    word: "TypeScript",
+    detail: "one base config every workspace extends, five flags past strict",
     version: VERSIONS.typescript,
   },
+  {
+    letter: "T",
+    word: "TanStack",
+    detail: "Router and Query as the app shell",
+  },
+  {
+    letter: "E",
+    word: "Edge-deployed",
+    detail: "Netlify for the web, Render for workers, Convex for the backend",
+  },
+  {
+    letter: "R",
+    word: "React",
+    detail: "19, with visual elements in exactly one package",
+  },
+];
+
+/** Everything else in the tin. The label's indented sub-entries. */
+export const ALSO_INSIDE: readonly Ingredient[] = [
   {
     layer: "Biome",
     detail: "lint and format, one tool",
@@ -60,13 +97,20 @@ export const INGREDIENTS: readonly Ingredient[] = [
   },
   {
     layer: "Knip",
-    detail: "dead exports and unused dependencies",
+    detail: "dead exports, unused dependencies",
     version: VERSIONS.knip,
   },
-  { layer: "GitHub Actions", detail: "fan out, then one required check" },
-  // No version: this repo installs no React, so nothing could check the number
-  // and "every version here is looked up" would stop being true.
-  { layer: "React", detail: "19, with TanStack Router and Query" },
-  { layer: "Component library", detail: "tokens, style objects, a story gate" },
-  { layer: "Netlify · Render · Convex", detail: "web, workers, backend" },
+  {
+    layer: "One aggregate CI gate",
+    detail: "fan out, then one required check",
+  },
+  { layer: "Tokens + component library", detail: "with a story gate" },
+];
+
+/** The free-from line along the bottom, the way a label carries allergens. */
+export const FREE_FROM: readonly string[] = [
+  "Prettier",
+  "Turbo",
+  "Nx",
+  "CSS Modules",
 ];
