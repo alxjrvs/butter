@@ -17,7 +17,9 @@
     "lint": "biome check",
     "format": "biome check --write",
     "knip": "knip",
-    "check": "bun run lint && bun run typecheck && bun run knip && bun run build",
+    "test": "bun test",
+    "workbench": "bun run --filter '@butter/component-lib' workbench",
+    "check": "bun run lint && bun run typecheck && bun run knip && bun run test && bun run build",
     "prepare": "[ -n \"$CI\" ] || lefthook install"
   },
   "devDependencies": {

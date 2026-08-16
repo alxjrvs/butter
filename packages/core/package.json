@@ -1,14 +1,12 @@
 {
-  "name": "@butter/site",
+  "name": "@butter/core",
   "private": true,
   "type": "module",
-  "scripts": {
-    "build": "bun run src/build.ts",
-    "typecheck": "tsc --noEmit"
+  "exports": {
+    ".": "./index.ts"
   },
-  "dependencies": {
-    "@butter/component-lib": "workspace:*",
-    "@butter/core": "workspace:*"
+  "scripts": {
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/bun": "catalog:",

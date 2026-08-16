@@ -1,0 +1,21 @@
+{
+  "name": "@butter/component-lib",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "workbench": "bun run .workbench/build.ts"
+  },
+  "dependencies": {
+    "@butter/content": "workspace:*",
+    "@butter/core": "workspace:*",
+    "@butter/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "typescript": "catalog:"
+  }
+}

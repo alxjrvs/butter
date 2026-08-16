@@ -1,13 +1,14 @@
 {
-  "name": "@butter/site",
+  "name": "@butter/content",
   "private": true,
   "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
   "scripts": {
-    "build": "bun run src/build.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@butter/component-lib": "workspace:*",
     "@butter/core": "workspace:*"
   },
   "devDependencies": {
