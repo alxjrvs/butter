@@ -1,6 +1,5 @@
 import { type Html, html } from "@butter/core";
 import type { Ingredient, NameKeyEntry } from "./types.ts";
-import { VERSIONS } from "./versions.ts";
 
 export const CREAM: {
   readonly heading: string;
@@ -38,42 +37,38 @@ export const CREAM: {
 };
 
 /**
- * B·U·T·T·E·R — the six letters, and the choice each one stands for.
+ * B·U·T·T·E·R — the six words the name is built from.
  *
- * These render as the bold lines of the label, which is what makes the acronym
- * an explanation rather than a mnemonic. A reader gets the name and the stack
- * in the same glance.
+ * These render as the bold lines of the label, each with its own first letter
+ * picked out, which is what makes the acronym an explanation rather than a
+ * mnemonic. A reader gets the name and the stack in the same glance.
+ *
+ * No versions here. A patch number is noise on a page about a stack; the one
+ * major that earns a mention rides along in its own detail line.
  */
 export const NAME_KEY: readonly NameKeyEntry[] = [
   {
-    letter: "B",
     word: "Bun",
     detail: "runtime, package manager, workspaces, tests, scripts",
-    version: VERSIONS.bun,
   },
   {
-    letter: "U",
     word: "Unified workspace",
     detail: "apps/* for what you deploy, packages/* for what they share",
   },
   {
-    letter: "T",
     word: "TypeScript",
-    detail: "one base config every workspace extends, five flags past strict",
-    version: VERSIONS.typescript,
+    detail:
+      "7+, one base config every workspace extends, five flags past strict",
   },
   {
-    letter: "T",
     word: "TanStack",
     detail: "Router and Query as the app shell",
   },
   {
-    letter: "E",
     word: "Edge-deployed",
     detail: "Netlify for the web, Render for workers, Convex for the backend",
   },
   {
-    letter: "R",
     word: "React",
     detail: "19, with visual elements in exactly one package",
   },
@@ -81,21 +76,9 @@ export const NAME_KEY: readonly NameKeyEntry[] = [
 
 /** Everything else in the tin. The label's indented sub-entries. */
 export const ALSO_INSIDE: readonly Ingredient[] = [
-  {
-    layer: "Biome",
-    detail: "lint and format, one tool",
-    version: VERSIONS.biome,
-  },
-  {
-    layer: "Lefthook",
-    detail: "staged pre-commit, whole-repo pre-push",
-    version: VERSIONS.lefthook,
-  },
-  {
-    layer: "Knip",
-    detail: "dead exports, unused dependencies",
-    version: VERSIONS.knip,
-  },
+  { layer: "Biome", detail: "lint and format, one tool" },
+  { layer: "Lefthook", detail: "staged pre-commit, whole-repo pre-push" },
+  { layer: "Knip", detail: "dead exports, unused dependencies" },
   {
     layer: "One aggregate CI gate",
     detail: "fan out, then one required check",

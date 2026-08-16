@@ -3,7 +3,6 @@ import type { Html } from "@butter/core";
 /**
  * The taxonomy. Three tiers, and a component's tier is its directory.
  *
- *   marks/     one element, no children, no layout
  *   blocks/    owns its internal layout, takes data
  *   sections/  composes blocks, holds nothing but composition
  *
@@ -13,9 +12,14 @@ import type { Html } from "@butter/core";
  * tier is therefore a failing test rather than a slow drift back into a folder
  * called `misc`.
  */
-export type Tier = "marks" | "blocks" | "sections";
+export type Tier = "blocks" | "sections";
 
-export const TIERS: readonly Tier[] = ["marks", "blocks", "sections"];
+/**
+ * The single source for the tier list. The story test and the workbench both
+ * build their globs from it, so a tier cannot be added in one place and missed
+ * in the other.
+ */
+export const TIERS: readonly Tier[] = ["blocks", "sections"];
 
 export type Story = {
   readonly name: string;

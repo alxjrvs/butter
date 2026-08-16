@@ -11,7 +11,6 @@ export {
   type SectionShellProps,
 } from "./src/blocks/SectionShell.ts";
 export { Document, type DocumentProps } from "./src/document.ts";
-export { Version } from "./src/marks/Version.ts";
 export { Buttermilk } from "./src/sections/Buttermilk.ts";
 export { Churn } from "./src/sections/Churn.ts";
 export { Cream } from "./src/sections/Cream.ts";

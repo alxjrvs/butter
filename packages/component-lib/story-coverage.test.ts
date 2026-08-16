@@ -28,6 +28,11 @@ type Entry = {
   readonly file: string;
 };
 
+/** Built from TIERS, so the glob cannot drift from the taxonomy. */
+function tierGlob(suffix: string): string {
+  return `{${TIERS.join(",")}}/${suffix}`;
+}
+
 function scan(pattern: string): readonly string[] {
   return [...new Glob(pattern).scanSync(src)]
     .map((path) => path.replaceAll("\\", "/"))
@@ -42,19 +47,14 @@ function parse(paths: readonly string[], suffix: string): readonly Entry[] {
 }
 
 const components = parse(
-  scan("{marks,blocks,sections}/*.ts").filter(
-    (path) => !path.endsWith(".stories.ts"),
-  ),
+  scan(tierGlob("*.ts")).filter((path) => !path.endsWith(".stories.ts")),
   ".ts",
 );
-const stories = parse(
-  scan("{marks,blocks,sections}/*.stories.ts"),
-  ".stories.ts",
-);
+const stories = parse(scan(tierGlob("*.stories.ts")), ".stories.ts");
 
 const key = (entry: Entry): string => `${entry.tier}/${entry.name}`;
 
-test("the taxonomy has all three tiers, and each is populated", () => {
+test("every tier is populated", () => {
   const populated = new Set(components.map((entry) => entry.tier));
   expect([...populated].sort()).toEqual([...TIERS].sort());
 });

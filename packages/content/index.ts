@@ -16,5 +16,5 @@ export type {
   SectionRef,
   Snippet,
 } from "./src/types.ts";
-export { VERSIONS, type VersionKey } from "./src/versions.ts";
+export { MAJORS, type MajorKey } from "./src/versions.ts";
 export { WRAPPER } from "./src/wrapper.ts";

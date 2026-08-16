@@ -20,10 +20,17 @@ export const KEEPING: {
       </p>
       <ul>
         <li>
-          <strong>Every version here is looked up, never typed.</strong> The component that
-          prints one takes a catalog key rather than a string, and a test asserts every entry
-          against the root <code>package.json</code> and <code>.bun-version</code>. Bump a
-          dependency without updating the content and CI goes red.
+          <strong>Version claims are checked, not remembered.</strong> The page commits to
+          majors and nothing finer, because a patch number is noise here and dates the copy
+          within a week. A test asserts the major this repository installs is still the one the
+          page claims, so a jump to TypeScript 8 turns the build red until somebody decides what
+          the page ought to say.
+        </li>
+        <li>
+          <strong>The name key has to spell the name.</strong> The label picks each initial out
+          of the word itself, and a test reads those initials back. Add a seventh favourite tool
+          or reorder two, and the word the page is named after stops spelling — loudly, at
+          build time, rather than quietly to whoever reads down the left edge.
         </li>
         <li>
           <strong>The page's structure comes from one package.</strong> Every section, list and

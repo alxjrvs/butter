@@ -37,11 +37,12 @@ knip.json             per-workspace entry/project globs
 packages/             the house graph, bottom-up. Siblings never import siblings.
   core/               zero-dependency: the Html brand + escapeHtml
   content/            every string on the page, as typed data + its inline prose markup
-    versions.test.ts  asserts VERSIONS matches the catalog and .bun-version
+    versions.test.ts  asserts the TypeScript major matches the catalog
+    name-key.test.ts  asserts the name key still spells BUTTER
     recipe.test.ts    asserts every quoted snippet still matches its file
   tokens/             framework-agnostic: the two-ink palette + two type stacks
   component-lib/      the ONLY place page STRUCTURE is built
-    src/marks|blocks|sections/   the taxonomy; one story file each
+    src/blocks|sections/         the taxonomy; one story file each
     src/{document,story,styles}.ts   package infrastructure, no stories
     .workbench/build.ts          the workbench, in the package
     story-coverage.test.ts       1 component = 1 story, taxonomy-checked
@@ -110,10 +111,17 @@ reading why is how the property it protects gets lost.
 - **Yellow appears once, at the top.** One field of butter and then paper the rest of the way.
   A second yellow panel further down turns it into a pattern and costs the first one its
   emphasis — the earlier draft wrapped every element in the packaging and read as costume.
-- **Versions are looked up, never typed.** `VERSIONS` in `packages/content` is the only place
-  a version is written for display, `Version` takes a key rather than a string, and
-  `versions.test.ts` asserts every entry against the catalog and `.bun-version`. That is what
-  keeps the page's present tense true after a dependency bump.
+- **The page prints majors, never patch versions.** A patch number is noise on a page about a
+  stack and dates the copy every time Dependabot runs. `MAJORS` in `packages/content` holds the
+  majors the copy commits to — currently just TypeScript 7 — and `versions.test.ts` asserts
+  **equality** with the catalog rather than `>=`, because a claim of "7+" survives a bump to 8
+  without becoming false, which is precisely how it would go stale unnoticed.
+- **The label picks each initial out of its word.** `NameKeyEntry` has no `letter` field: storing
+  the initial beside the word let the two disagree, and printing both gave "B Bun".
+  `name-key.test.ts` reads the initials back and asserts they still spell BUTTER.
+- **`TIERS` is the only place the taxonomy is listed.** The story test and the workbench build
+  their globs from it, so a tier cannot be added in one and missed in the other. There are two
+  now — `blocks/` and `sections/` — because nothing on the page is a single element any more.
 
 ## Deliberately not here
 
