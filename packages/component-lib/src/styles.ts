@@ -240,15 +240,12 @@ const CODE = `
 `;
 
 const LABEL = `
-  .namekey { font-size: 1.05rem; }
-  .namekey strong { color: var(--accent-ink); }
-
   /* A printed panel sitting on the page, not the page dressing up as one. The
      rule weights are the hierarchy — heavy bar between the name key and
      everything else, hairlines between rows — which is how a real label carries
      structure without a legend. */
   .label {
-    margin: 1.8rem 0 0;
+    margin: 1.8rem 0;
     padding: 0.7rem 0.9rem 0.9rem;
     max-width: 25rem;
     background: var(--label-bg);
