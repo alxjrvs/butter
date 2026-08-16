@@ -151,17 +151,6 @@ const BANNER = `
     font-style: italic;
   }
 
-  .banner .versions {
-    margin: 1.6rem 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem 1.4rem;
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    color: var(--banner-ink-2);
-  }
-  .version { font-variant-numeric: tabular-nums; }
 
   .contents {
     padding-top: 2.5rem;
@@ -270,33 +259,19 @@ const LABEL = `
   .label hr.mid { height: 5px; }
   .label hr.thick { height: 9px; }
 
-  .lhead {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 0.8rem;
-    font-size: 0.82rem;
+  .lamount {
+    margin: 0 0 0.15rem;
+    font-size: 0.72rem;
     font-weight: 700;
-  }
-  .lamount { font-size: 0.72rem; padding-bottom: 0.15rem; }
-  .lv {
-    flex: none;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-variant-numeric: tabular-nums;
   }
   .lrow { padding: 0.3rem 0; border-bottom: 1px solid var(--label-ink); }
   .lrow:last-of-type { border-bottom: 0; }
   .lrow.sub { padding-left: 1rem; }
-  .lrow.sub .lhead { font-weight: 400; }
-  .letter {
-    display: inline-block;
-    min-width: 1rem;
-    font-weight: 800;
-    color: var(--accent-ink);
-  }
+  .lname { margin: 0; font-size: 0.82rem; font-weight: 700; }
+  .lrow.sub .lname { font-weight: 400; }
+  /* The initial is the first character of the word, not a letter beside it. */
+  .letter { color: var(--accent-ink); }
   .ldetail { margin: 0.1rem 0 0; font-size: 0.72rem; line-height: 1.35; }
-  .lrow.sub .ldetail { padding-left: 0; }
   .lfree {
     margin: 0.5rem 0 0;
     font-size: 0.72rem;

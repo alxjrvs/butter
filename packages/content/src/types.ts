@@ -7,23 +7,21 @@ export type Command = {
 };
 
 /**
- * One letter of B·U·T·T·E·R, and the choice it stands for.
+ * One of the six words the name is built from.
  *
- * `letter` is required, which is what stops the name key drifting into a list
- * of favourite tools: an entry has to earn a letter of the name to be in it.
+ * There is no `letter` field: the label picks out `word`'s first character, so
+ * storing the initial separately would let the two disagree. `name-key.test.ts`
+ * asserts the initials still spell BUTTER.
  */
 export type NameKeyEntry = {
-  readonly letter: string;
   readonly word: string;
   readonly detail: string;
-  readonly version?: string;
 };
 
 /** Everything else in the tin. Set as the label's indented sub-entries. */
 export type Ingredient = {
   readonly layer: string;
   readonly detail: string;
-  readonly version?: string;
 };
 
 /** One of the eight layers. `body` is authored markup; the rest is data. */

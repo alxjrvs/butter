@@ -1,6 +1,5 @@
 import { type Html, html } from "@butter/core";
 import type { Command } from "./types.ts";
-import type { VersionKey } from "./versions.ts";
 
 export const WRAPPER: {
   readonly name: string;
@@ -8,7 +7,6 @@ export const WRAPPER: {
   readonly lede: Html;
   readonly proof: string;
   readonly commands: readonly Command[];
-  readonly versions: readonly VersionKey[];
 } = {
   name: "butter",
 
@@ -30,6 +28,4 @@ export const WRAPPER: {
     { cmd: "bun install" },
     { cmd: "bun run check", note: "the whole gate, in one command" },
   ],
-
-  versions: ["bun", "typescript", "biome"],
 };

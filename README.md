@@ -28,11 +28,12 @@ is built in exactly one package, and both of those are checked rather than asked
 packages/core            the Html brand + escapeHtml. Zero dependencies.
 packages/content         every string on the page, typed. No page structure.
 packages/tokens          the two-ink palette and the type stacks.
-packages/component-lib   builds every section, list and panel. marks / blocks / sections.
+packages/component-lib   builds every section, list and panel. blocks / sections.
 apps/site                composes them. Emits no markup of its own.
 ```
 
-Three tests hold it together. `story-coverage.test.ts` fails when a component has no story or
-sits in the wrong tier. `versions.test.ts` fails when a version printed on the page stops
-matching the one the repo installs. `recipe.test.ts` fails when a config snippet on the page
-stops matching the file it was quoted from.
+Four tests hold it together. `story-coverage.test.ts` fails when a component has no story or
+sits in the wrong tier. `versions.test.ts` fails when the TypeScript major the page claims stops
+matching the one the repo installs. `name-key.test.ts` fails when the label's initials stop
+spelling BUTTER. `recipe.test.ts` fails when a config snippet stops matching the file it was
+quoted from.

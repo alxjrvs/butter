@@ -1,43 +1,29 @@
 import { expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { VERSIONS, type VersionKey } from "./src/versions.ts";
+import { MAJORS } from "./src/versions.ts";
 
 /**
- * The page prints versions. This is what makes them true.
+ * The page says "TypeScript 7+". This is what keeps that true.
  *
- * `VERSIONS` is the only place a version is written for display, and every
- * entry has to match what the repository installs. Bumping a dependency
- * without updating the content therefore fails CI, rather than shipping a page
- * that describes a toolchain nobody is running.
+ * The assertion is equality rather than "at least", deliberately. A claim of
+ * `7+` survives a bump to 8 without becoming false, which is exactly how it
+ * would go stale unnoticed — so the test fails on any major change and makes
+ * somebody decide whether the page should now say 8.
  */
 
 const root = join(import.meta.dir, "..", "..");
 
-type RootManifest = {
-  readonly catalog: Record<string, string>;
-  readonly devDependencies: Record<string, string>;
-};
+type RootManifest = { readonly catalog: Record<string, string> };
 
 const manifest = JSON.parse(
   readFileSync(join(root, "package.json"), "utf8"),
 ) as RootManifest;
 
-const bunVersion = readFileSync(join(root, ".bun-version"), "utf8").trim();
-
-/** Widened: the literal types are the point everywhere except in here. */
-const declared: Record<VersionKey, string> = VERSIONS;
-
-const CASES: readonly (readonly [VersionKey, string, string | undefined])[] = [
-  ["bun", ".bun-version", bunVersion],
-  ["typescript", "catalog.typescript", manifest.catalog.typescript],
-  ["biome", "catalog.@biomejs/biome", manifest.catalog["@biomejs/biome"]],
-  ["knip", "devDependencies.knip", manifest.devDependencies.knip],
-  ["lefthook", "devDependencies.lefthook", manifest.devDependencies.lefthook],
-];
-
-for (const [key, source, actual] of CASES) {
-  test(`${key} matches ${source}`, () => {
-    expect(declared[key]).toBe(actual as string);
-  });
+function major(range: string | undefined): number {
+  return Number.parseInt((range ?? "").replace(/^\D*/, ""), 10);
 }
+
+test("the TypeScript major the page claims is the one we install", () => {
+  expect(major(manifest.catalog.typescript)).toBe(MAJORS.typescript);
+});

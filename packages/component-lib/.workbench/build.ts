@@ -23,9 +23,7 @@ const outDir = join(import.meta.dir, "dist");
 
 type Loaded = { readonly tier: Tier; readonly module: StoryModule };
 
-const paths = [
-  ...new Glob("{marks,blocks,sections}/*.stories.ts").scanSync(src),
-]
+const paths = [...new Glob(`{${TIERS.join(",")}}/*.stories.ts`).scanSync(src)]
   .map((path) => path.replaceAll("\\", "/"))
   .sort();
 
