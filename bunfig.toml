@@ -1,0 +1,9 @@
+# Bun is the runtime, package manager, workspace host and script runner. This
+# file is where the operational knowledge about that lives.
+[install]
+# Strict node_modules: a workspace can only import what it declares. The house
+# default, and only inverted where a toolchain demands it (an Expo tree needs
+# `hoisted` to stay single-instance).
+linker = "isolated"
+# Lockfile churn is review noise. Pin exactly and let Dependabot do the bumping.
+exact = true

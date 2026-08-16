@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: .bun-version
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: .bun-version
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+
+  knip:
+    name: Knip
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: .bun-version
+      - run: bun install --frozen-lockfile
+      - run: bun run knip
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: .bun-version
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+
+  # The aggregate gate. This is the ONLY job branch protection requires, which is
+  # what keeps the required-check list from having to be edited every time a job
+  # is added or a path filter skips one.
+  #
+  # Two things have to be right, and they are separate:
+  #
+  #   1. `needs:` must list EVERY other job in this file. A job missing from that
+  #      list can never fail the required check, and nothing warns you.
+  #
+  #   2. `if: always()` makes this job RUN regardless of how its dependencies
+  #      finished. It does NOT make it FAIL with them — without the step below,
+  #      the job runs, has nothing to do, and reports success, so the required
+  #      check is permanently green no matter what broke.
+  #
+  # The step tests for `failure` and `cancelled` rather than for "not success",
+  # so a job that was legitimately SKIPPED (a path filter, a conditional) leaves
+  # the gate passing instead of blocking the PR forever.
+  CI-Success:
+    name: CI Success
+    if: always()
+    needs: [lint, typecheck, knip, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if any dependency failed
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: exit 1

@@ -1,0 +1,24 @@
+# Two tiers, and the split is the whole point.
+#
+#   pre-commit  cheap, and STAGED FILES ONLY. It runs on every commit, so it has
+#               to stay under a second or it gets bypassed with --no-verify.
+#   pre-push    expensive, and whole-repo. It runs once per push, which is where
+#               a full typecheck and build can afford to live.
+pre-commit:
+  parallel: true
+  commands:
+    biome:
+      glob: "*.{ts,tsx,js,jsx,json,jsonc}"
+      # --no-errors-on-unmatched: after the glob filter a commit that touches no
+      # matching file passes an empty list, which Biome otherwise treats as an
+      # error. stage_fixed re-stages what --write repaired.
+      run: bunx biome check --write --no-errors-on-unmatched {staged_files}
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  commands:
+    typecheck:
+      run: bun run typecheck
+    build:
+      run: bun run build

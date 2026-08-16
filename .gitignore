@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+
+# Agent worktrees: full copies of this repo. Biome only skips these because
+# biome.json sets vcs.useIgnoreFile — it does not read .gitignore by default.
+.claude/
