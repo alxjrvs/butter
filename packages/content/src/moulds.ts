@@ -18,8 +18,8 @@ export const MOULDS: {
       </p>
       <p>
         The layers underneath are identical in every repository. What sits on top of them is
-        not, and in practice it has only ever been four things. Each one below is a shape an
-        entry in <code>apps/*</code> gets pressed into, and each names the repositories it is
+        not, and in practice it settles into four shapes. Each one below is a shape an entry
+        in <code>apps/*</code> gets pressed into, and each names the repositories it is
         pressed into today.
       </p>`),
 
@@ -41,7 +41,7 @@ export const MOULDS: {
  *
  * `apps` is data and the body is prose, which is the same seam the rest of the
  * package runs on. Every entry points at a public repository — a shape nobody
- * can open is a claim rather than an example, which is why the private one is
+ * can open is a claim rather than an example, which is why the private ones are
  * not on this page.
  */
 export const MOULDS_LIST: readonly Mould[] = [

@@ -335,9 +335,9 @@ const LISTS = `
   }
 
   /* The shapes, always open. The layers above them collapse because there are
-     eight of them and the tag line is enough to scan; there are four of these
-     and the links at the bottom of each are the point, so folding them away
-     would hide the only part a reader can click through to. */
+     more of them and a tag line is enough to scan by; here the links at the
+     bottom of each block are the point, so folding them away would hide the
+     only part a reader can click through to. */
   .moulds { margin-top: 1.6rem; }
   .mould { padding: 1.1rem 0; border-top: 1px solid var(--rule); }
   .mould:last-child { border-bottom: 1px solid var(--rule); }
