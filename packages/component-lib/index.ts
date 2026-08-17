@@ -2,6 +2,7 @@ export { CodeBlock } from "./src/blocks/CodeBlock.ts";
 export { CommandBlock } from "./src/blocks/CommandBlock.ts";
 export { ExclusionList } from "./src/blocks/ExclusionList.ts";
 export { LayerList } from "./src/blocks/LayerList.ts";
+export { MouldList } from "./src/blocks/MouldList.ts";
 export {
   NutritionLabel,
   type NutritionLabelProps,
@@ -18,6 +19,7 @@ export { Cream } from "./src/sections/Cream.ts";
 export { Handle } from "./src/sections/Handle.ts";
 export { Keeping } from "./src/sections/Keeping.ts";
 export { Lamination } from "./src/sections/Lamination.ts";
+export { Moulds } from "./src/sections/Moulds.ts";
 export { Recipe } from "./src/sections/Recipe.ts";
 export { Spread } from "./src/sections/Spread.ts";
 export { Wrapper } from "./src/sections/Wrapper.ts";

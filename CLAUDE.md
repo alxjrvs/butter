@@ -110,6 +110,12 @@ reading why is how the property it protects gets lost.
 - **Yellow appears once, at the top.** One field of butter and then paper the rest of the way.
   A second yellow panel further down turns it into a pattern and costs the first one its
   emphasis — the earlier draft wrapped every element in the packaging and read as costume.
+- **Every app the page links to is a public repository.** `Mould.apps` in
+  `packages/content` is data rather than links buried in prose, and each `href` is an absolute
+  `https://github.com/…` — root-absolute would 404 under `/butter/`. The page names four
+  shapes and points at the deployables in them, so an entry a reader cannot open turns an
+  example back into a claim. There are private repositories on this stack; they are not on
+  this page, and a count of "how many repos" is not either — counting dates the claim.
 - **Versions are looked up, never typed.** `VERSIONS` in `packages/content` is the only place
   a version is written for display, `Version` takes a key rather than a string, and
   `versions.test.ts` asserts every entry against the catalog and `.bun-version`. That is what

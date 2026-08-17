@@ -334,6 +334,52 @@ const LISTS = `
     color: var(--ink-2);
   }
 
+  /* The shapes, always open. The layers above them collapse because there are
+     eight of them and the tag line is enough to scan; there are four of these
+     and the links at the bottom of each are the point, so folding them away
+     would hide the only part a reader can click through to. */
+  .moulds { margin-top: 1.6rem; }
+  .mould { padding: 1.1rem 0; border-top: 1px solid var(--rule); }
+  .mould:last-child { border-bottom: 1px solid var(--rule); }
+  .mould h3 {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    font-size: 1.05rem;
+  }
+  .mould b { font-weight: 700; color: var(--accent-ink); }
+  .mould i {
+    font-style: normal;
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-3);
+  }
+  .mould p {
+    margin: 0.8rem 0 0;
+    max-width: var(--measure);
+    color: var(--ink-2);
+  }
+
+  /* The apps are data, and they read as data: monospace, dim, and wrapping
+     rather than scrolling, because these are repository paths on a page that
+     has to survive a phone. */
+  .apps {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.2rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+  }
+  .apps a { color: var(--ink-3); }
+  .apps a:hover { color: var(--ink); }
+
+  .prose.outro { margin-top: 1.8rem; }
+
   .exclusions { margin: 1.6rem 0 0; }
   .exclusions > div { padding: 0.7rem 0; border-top: 1px solid var(--rule); }
   .exclusions > div:last-child { border-bottom: 1px solid var(--rule); }
