@@ -37,17 +37,6 @@ export const CREAM: {
 };
 
 /**
- * B·U·T·T·E·R — the six letters, and the choice each one stands for.
- *
- * These render as the bold lines of the label, with each word's first letter
- * picked out in the accent colour, which is what makes the acronym an
- * explanation rather than a mnemonic. A reader gets the name and the stack in
- * the same glance, and the name is never spelled twice.
- *
- * The order is the acronym, so these are not sorted or regrouped, and
- * `acronym.test.ts` fails if the initials stop spelling it.
- */
-/**
  * The character the label colours, and the character the acronym is spelled
  * from. One function, because they have to be the same one.
  *
@@ -61,6 +50,17 @@ export function nameInitial(word: string): string {
   return word.slice(0, 1);
 }
 
+/**
+ * B·U·T·T·E·R — the six letters, and the choice each one stands for.
+ *
+ * These render as the bold lines of the label, with each word's first letter
+ * picked out in the accent colour, which is what makes the acronym an
+ * explanation rather than a mnemonic. A reader gets the name and the stack in
+ * the same glance, and the name is never spelled twice.
+ *
+ * The order is the acronym, so these are not sorted or regrouped, and
+ * `acronym.test.ts` fails if the initials stop spelling it.
+ */
 export const NAME_KEY: readonly NameKeyEntry[] = [
   {
     word: "Bun",

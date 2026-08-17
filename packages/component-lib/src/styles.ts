@@ -303,14 +303,11 @@ const LABEL = `
   .label hr.mid { height: 5px; }
   .label hr.thick { height: 9px; }
 
-  .lhead {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 0.8rem;
-    font-size: 0.82rem;
-    font-weight: 700;
-  }
+  /* A row head is one span now. The flex box that used to hold it apart from
+     the version cell went with the version cell — space-between, the gap and
+     the baseline alignment were all describing a second child that no longer
+     exists. */
+  .lhead { font-size: 0.82rem; font-weight: 700; }
   .lamount { font-size: 0.72rem; padding-bottom: 0.15rem; }
   .lrow { padding: 0.3rem 0; border-bottom: 1px solid var(--label-ink); }
   .lrow:last-of-type { border-bottom: 0; }
