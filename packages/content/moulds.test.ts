@@ -14,18 +14,15 @@ import { MOULDS_LIST } from "./src/moulds.ts";
  * *public* is not — that is a property of GitHub on the day someone reads it,
  * not of this file — so it stays a rule in CLAUDE.md and a step when adding an
  * entry.
+ *
+ * "A shape names at least one app" is deliberately not here. `Mould.apps` is a
+ * non-empty tuple, so an empty list does not compile, and a test that cannot
+ * fail reads as coverage while providing none.
  */
 
 const apps = MOULDS_LIST.flatMap((mould) =>
   mould.apps.map((app) => ({ shape: mould.shape, ...app })),
 );
-
-test("every mould names at least one app", () => {
-  const empty = MOULDS_LIST.filter((mould) => mould.apps.length === 0).map(
-    (mould) => mould.shape,
-  );
-  expect(empty).toEqual([]);
-});
 
 test("every href is an absolute GitHub url", () => {
   const wrong = apps
@@ -38,6 +35,13 @@ test("every href is an absolute GitHub url", () => {
  * The label is a shorthand for the href, so the two can disagree — retarget a
  * link, leave the label, and the page names one app while linking another.
  * Nothing else would notice.
+ *
+ * A label is `<repo>/<path>` today because every entry is an app inside a
+ * monorepo, but the shapes are not required to be: a whole repository is a
+ * legitimate thing to point at, and its label has no path at all. That case is
+ * split out rather than left to fall through, because the fall-through does not
+ * merely miss it — it fails a correct entry, with a message describing a
+ * mismatch that isn't there.
  */
 test("every label agrees with the url it labels", () => {
   const mismatched: string[] = [];
@@ -45,6 +49,12 @@ test("every label agrees with the url it labels", () => {
   for (const app of apps) {
     const [repo = "", ...path] = app.label.split("/");
 
+    if (path.length === 0) {
+      if (!app.href.endsWith(`/${repo}`)) {
+        mismatched.push(`${app.label}: url does not end at the repository`);
+      }
+      continue;
+    }
     if (!app.href.includes(`/${repo}/`)) {
       mismatched.push(`${app.label}: url names no repository "${repo}"`);
     }
