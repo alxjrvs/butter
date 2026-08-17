@@ -9,21 +9,25 @@ export type Command = {
 /**
  * One letter of B·U·T·T·E·R, and the choice it stands for.
  *
- * `letter` is required, which is what stops the name key drifting into a list
- * of favourite tools: an entry has to earn a letter of the name to be in it.
+ * There is no separate `letter`, and that is the point: the letter *is* the
+ * first character of `word`, coloured where it already sits. Held as its own
+ * field it was printed beside the word — "B Bun" — which announces the acronym
+ * twice and lets the two disagree.
+ *
+ * What stops the key drifting into a list of favourite tools is no longer a
+ * required field but `acronym.test.ts`, which asserts the initials still spell
+ * the name. That is the stronger rule anyway: a field only demanded that an
+ * entry carry *a* letter, not that the letters add up to anything.
  */
 export type NameKeyEntry = {
-  readonly letter: string;
   readonly word: string;
   readonly detail: string;
-  readonly version?: string;
 };
 
 /** Everything else in the tin. Set as the label's indented sub-entries. */
 export type Ingredient = {
   readonly layer: string;
   readonly detail: string;
-  readonly version?: string;
 };
 
 /** One of the eight layers. `body` is authored markup; the rest is data. */

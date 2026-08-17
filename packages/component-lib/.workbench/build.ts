@@ -49,8 +49,14 @@ function renderTier(tier: Tier): string {
     .map((entry) => {
       const stories = entry.module.stories
         .map(
+          // Each story renders inside its own formatting context. The page puts
+          // one component per section and lets `section` contain its floats;
+          // the workbench puts every story of a tier in ONE section, so without
+          // this a floated component (the nutrition label, above 62rem) escapes
+          // its own story and the next story's name — and the next component's
+          // heading — wrap around it.
           (story) => `      <p class="story-name">${escapeHtml(story.name)}</p>
-      ${story.render()}`,
+      <div style="display: flow-root">${story.render()}</div>`,
         )
         .join("\n");
 

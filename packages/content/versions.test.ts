@@ -16,7 +16,6 @@ const root = join(import.meta.dir, "..", "..");
 
 type RootManifest = {
   readonly catalog: Record<string, string>;
-  readonly devDependencies: Record<string, string>;
 };
 
 const manifest = JSON.parse(
@@ -32,9 +31,18 @@ const CASES: readonly (readonly [VersionKey, string, string | undefined])[] = [
   ["bun", ".bun-version", bunVersion],
   ["typescript", "catalog.typescript", manifest.catalog.typescript],
   ["biome", "catalog.@biomejs/biome", manifest.catalog["@biomejs/biome"]],
-  ["knip", "devDependencies.knip", manifest.devDependencies.knip],
-  ["lefthook", "devDependencies.lefthook", manifest.devDependencies.lefthook],
 ];
+
+/**
+ * Every key, not a list someone remembered to extend. `VERSIONS` gaining an
+ * entry with no case above would otherwise be asserted by nothing at all —
+ * which is the same silent hole the CI gate's `needs:` list has.
+ */
+test("every VERSIONS entry has a case", () => {
+  expect(CASES.map(([key]) => key).sort()).toEqual(
+    (Object.keys(VERSIONS) as VersionKey[]).sort(),
+  );
+});
 
 for (const [key, source, actual] of CASES) {
   test(`${key} matches ${source}`, () => {

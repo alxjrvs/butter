@@ -1,6 +1,5 @@
 import { type Html, html } from "@butter/core";
 import type { Ingredient, NameKeyEntry } from "./types.ts";
-import { VERSIONS } from "./versions.ts";
 
 export const CREAM: {
   readonly heading: string;
@@ -38,42 +37,52 @@ export const CREAM: {
 };
 
 /**
+ * The character the label colours, and the character the acronym is spelled
+ * from. One function, because they have to be the same one.
+ *
+ * The label picks a letter out of a word and `acronym.test.ts` asserts those
+ * letters spell the name — two places applying "the first character of `word`".
+ * Written twice they can diverge: teach the renderer grapheme-aware splitting
+ * and the test goes on asserting about the old rule, green, while the panel
+ * spells something else.
+ */
+export function nameInitial(word: string): string {
+  return word.slice(0, 1);
+}
+
+/**
  * B·U·T·T·E·R — the six letters, and the choice each one stands for.
  *
- * These render as the bold lines of the label, which is what makes the acronym
- * an explanation rather than a mnemonic. A reader gets the name and the stack
- * in the same glance.
+ * These render as the bold lines of the label, with each word's first letter
+ * picked out in the accent colour, which is what makes the acronym an
+ * explanation rather than a mnemonic. A reader gets the name and the stack in
+ * the same glance, and the name is never spelled twice.
+ *
+ * The order is the acronym, so these are not sorted or regrouped, and
+ * `acronym.test.ts` fails if the initials stop spelling it.
  */
 export const NAME_KEY: readonly NameKeyEntry[] = [
   {
-    letter: "B",
     word: "Bun",
     detail: "runtime, package manager, workspaces, tests, scripts",
-    version: VERSIONS.bun,
   },
   {
-    letter: "U",
     word: "Unified workspace",
     detail: "apps/* for what you deploy, packages/* for what they share",
   },
   {
-    letter: "T",
     word: "TypeScript",
     detail: "one base config every workspace extends, five flags past strict",
-    version: VERSIONS.typescript,
   },
   {
-    letter: "T",
     word: "TanStack",
     detail: "Router and Query as the app shell",
   },
   {
-    letter: "E",
     word: "Edge-deployed",
     detail: "Netlify for the web, Render for workers, Convex for the backend",
   },
   {
-    letter: "R",
     word: "React",
     detail: "19, with visual elements in exactly one package",
   },
@@ -81,21 +90,12 @@ export const NAME_KEY: readonly NameKeyEntry[] = [
 
 /** Everything else in the tin. The label's indented sub-entries. */
 export const ALSO_INSIDE: readonly Ingredient[] = [
-  {
-    layer: "Biome",
-    detail: "lint and format, one tool",
-    version: VERSIONS.biome,
-  },
+  { layer: "Biome", detail: "lint and format, one tool" },
   {
     layer: "Lefthook",
     detail: "staged pre-commit, whole-repo pre-push",
-    version: VERSIONS.lefthook,
   },
-  {
-    layer: "Knip",
-    detail: "dead exports, unused dependencies",
-    version: VERSIONS.knip,
-  },
+  { layer: "Knip", detail: "dead exports, unused dependencies" },
   {
     layer: "One aggregate CI gate",
     detail: "fan out, then one required check",
