@@ -128,12 +128,17 @@ reading why is how the property it protects gets lost.
 - **The nutrition label floats, and three things hold that up.** Above `62rem` it is
   `float: right` with a negative right margin, so the section's prose wraps around it and the
   panel overhangs the column. (1) `section` is `display: flow-root`, or the float escapes
-  Cream and the *next* section's heading wraps around it. (2) `Cream` emits the label
-  **before** the prose, because a float is placed from where it sits in the flow — move it
-  after and only what follows it wraps. (3) The float lives in a `min-width` query, so
-  narrow viewports get the plain block and never a sideways scroll; the overhang spends the
-  section's own `1.5rem` of padding first, so only `3rem` lands outside the `46rem` column.
-  Text wraps to about `25rem` beside it, which is short for a measure and is the trade.
+  Cream and the *next* section's heading wraps around it. (2) The float lives in a `min-width`
+  query, so narrow viewports get the plain block and never a sideways scroll; the overhang
+  spends the section's own `1.5rem` of padding first, so only `3rem` lands outside the `46rem`
+  column. Text wraps to about `25rem` beside it, which is short for a measure and is the trade.
+  - **The label stays after the lead in the source, and moving it up is the tempting mistake.**
+    A float is placed from where it sits in the flow, so emitting the panel first buys it a
+    paragraph more text to wrap — but the float only exists above `62rem`. Below it, and for
+    anything that follows the document rather than the painting, source order *is* the order:
+    the tin would arrive ahead of the sentence introducing it, "here is the tin" would point
+    backwards, and a screen reader would read eleven rows of ingredients before saying what
+    they are. The white space under the last line is the cheaper cost.
 - **The label prints no versions, and the acronym is not spelled twice.** Each name-key row
   colours the first character of its own `word` — there is no `letter` field to disagree with
   it, and `acronym.test.ts` asserts the initials still spell `WRAPPER.name`. `VERSIONS` holds

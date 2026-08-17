@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { NAME_KEY } from "./src/cream.ts";
+import { NAME_KEY, nameInitial } from "./src/cream.ts";
 import { WRAPPER } from "./src/wrapper.ts";
 
 /**
@@ -16,9 +16,13 @@ import { WRAPPER } from "./src/wrapper.ts";
  * actually claims is that these six initials are the name — so that is what is
  * asserted, against `WRAPPER.name` rather than a literal, because the name is
  * already written down once.
+ *
+ * `nameInitial` is the label's own function, not a second copy of the rule.
+ * Re-deriving the first character here would assert about this file's idea of
+ * it, and leave the panel free to colour something else.
  */
 
-const initials = NAME_KEY.map((entry) => entry.word.slice(0, 1)).join("");
+const initials = NAME_KEY.map((entry) => nameInitial(entry.word)).join("");
 
 test("the name key's initials spell the name", () => {
   expect(initials.toLowerCase()).toBe(WRAPPER.name.toLowerCase());

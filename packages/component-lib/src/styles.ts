@@ -75,11 +75,14 @@ const BASE = `
   .prose { max-width: var(--measure); }
   .prose p { margin: 0 0 1rem; }
   .prose p:last-child { margin-bottom: 0; }
-  /* Two prose blocks in a row are one piece of writing split around something
-     that sits between them in the source but not on the page. The last-child
-     rule above zeroes the gap at the seam, so it is put back here — otherwise
-     the two paragraphs either side of it run together as if they were one. */
-  .prose + .prose { margin-top: 1rem; }
+  /* The prose after the label needs its own top margin, and only once the label
+     floats. Out of flow, the panel stops holding the two prose blocks apart, and
+     the last-child reset above has already zeroed the gap at the seam — so the
+     sentence before it and the paragraph after it run together as one.
+
+     It collapses with the label's own 1.8rem bottom margin when the panel is
+     back in flow, so the narrow layout is unchanged rather than 1rem looser. */
+  .label + .prose { margin-top: 1rem; }
   .prose .lede { color: var(--ink-2); }
 
   /* The page's headings are butter — Cream, The churn, Buttermilk. The deck is

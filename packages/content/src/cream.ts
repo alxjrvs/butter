@@ -47,6 +47,20 @@ export const CREAM: {
  * The order is the acronym, so these are not sorted or regrouped, and
  * `acronym.test.ts` fails if the initials stop spelling it.
  */
+/**
+ * The character the label colours, and the character the acronym is spelled
+ * from. One function, because they have to be the same one.
+ *
+ * The label picks a letter out of a word and `acronym.test.ts` asserts those
+ * letters spell the name — two places applying "the first character of `word`".
+ * Written twice they can diverge: teach the renderer grapheme-aware splitting
+ * and the test goes on asserting about the old rule, green, while the panel
+ * spells something else.
+ */
+export function nameInitial(word: string): string {
+  return word.slice(0, 1);
+}
+
 export const NAME_KEY: readonly NameKeyEntry[] = [
   {
     word: "Bun",

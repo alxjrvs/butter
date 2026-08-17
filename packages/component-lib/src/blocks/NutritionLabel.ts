@@ -1,4 +1,8 @@
-import type { Ingredient, NameKeyEntry } from "@butter/content";
+import {
+  type Ingredient,
+  type NameKeyEntry,
+  nameInitial,
+} from "@butter/content";
 import { escapeHtml, type Html, html } from "@butter/core";
 
 export type NutritionLabelProps = {
@@ -6,6 +10,24 @@ export type NutritionLabelProps = {
   readonly also: readonly Ingredient[];
   readonly freeFrom: readonly string[];
 };
+
+/**
+ * The word, with its own first letter picked out in the accent colour.
+ *
+ * Not a letter printed *beside* the word: that read as "B Bun", which announces
+ * the acronym twice and needs the reader to notice they are the same letter.
+ * Colouring it where it already sits says it once, and the highlight cannot
+ * drift from the word it is taken out of.
+ *
+ * The split comes from `nameInitial` rather than a `slice` written here,
+ * because `acronym.test.ts` spells the name with that same function. Two copies
+ * of "the first character" is two rules, and only one of them is asserted.
+ */
+function initialled(word: string): string {
+  const initial = nameInitial(word);
+
+  return `<b class="letter">${escapeHtml(initial)}</b>${escapeHtml(word.slice(initial.length))}`;
+}
 
 /**
  * Butter Facts — the ingredient list, set as the panel it is imitating.
@@ -25,18 +47,6 @@ export type NutritionLabelProps = {
  * labels are set in, and keeping it inside this border is what makes the thing
  * read as a quoted artifact rather than as the page changing its voice.
  */
-/**
- * The word, with its own first letter picked out in the accent colour.
- *
- * Not a letter printed *beside* the word: that read as "B Bun", which announces
- * the acronym twice and needs the reader to notice they are the same letter.
- * Colouring it where it already sits says it once, and the highlight cannot
- * drift from the word it is taken out of.
- */
-function initialled(word: string): string {
-  return `<b class="letter">${escapeHtml(word.slice(0, 1))}</b>${escapeHtml(word.slice(1))}`;
-}
-
 export function NutritionLabel(props: NutritionLabelProps): Html {
   const key = props.nameKey
     .map(
