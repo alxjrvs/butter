@@ -116,10 +116,12 @@ reading why is how the property it protects gets lost.
   shapes and points at the deployables in them, so an entry a reader cannot open turns an
   example back into a claim. There are private repositories on this stack; they are not on
   this page, and a count of "how many repos" is not either — counting dates the claim.
-  `moulds.test.ts` asserts the half that is checkable offline: the scheme, the host, and that
-  a label still agrees with the url under it. **Whether the repository is public it cannot
-  check** — that is a fact about GitHub today, not about this file — so confirm it by hand
-  when adding an entry. `Mould.apps` is a non-empty tuple, so a shape with nothing in it is a
+  `moulds.test.ts` asserts the half that is checkable offline: the scheme, the host, that a
+  label still agrees with the url under it, and that the prose's spelled count matches the
+  number of shapes. **What it cannot check is whether the url resolves** — public or private,
+  `main` still the default branch, `apps/<name>` not since renamed. Those are facts about
+  GitHub on the day someone reads the page, not about this file, so open all of them by hand
+  when adding or retargeting an entry. They were 200 when this section landed. `Mould.apps` is a non-empty tuple, so a shape with nothing in it is a
   compile error rather than an empty list on the page.
 - **Versions are looked up, never typed.** `VERSIONS` in `packages/content` is the only place
   a version is written for display, `Version` takes a key rather than a string, and

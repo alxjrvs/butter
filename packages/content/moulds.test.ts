@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { MOULDS_LIST } from "./src/moulds.ts";
+import { MOULDS, MOULDS_LIST } from "./src/moulds.ts";
 
 /**
  * The links in "Moulds", asserted rather than trusted.
@@ -10,10 +10,11 @@ import { MOULDS_LIST } from "./src/moulds.ts";
  * wrong is a 404 on the only clickable evidence the section offers.
  *
  * What is checkable offline is checked here: the scheme, the host, and the
- * agreement between a label and the thing it labels. Whether a repository is
- * *public* is not — that is a property of GitHub on the day someone reads it,
- * not of this file — so it stays a rule in CLAUDE.md and a step when adding an
- * entry.
+ * agreement between a label and the thing it labels. Whether the url *resolves*
+ * is not — public or private, `main` still the default branch, the directory
+ * not since renamed are all facts about GitHub on the day someone reads the
+ * page, not about this file — so that stays a rule in CLAUDE.md and a link to
+ * open by hand when adding an entry.
  *
  * "A shape names at least one app" is deliberately not here. `Mould.apps` is a
  * non-empty tuple, so an empty list does not compile, and a test that cannot
@@ -100,6 +101,32 @@ test("one repository is in every shape", () => {
     others.every((repos) => repos.has(repo)),
   );
   expect(inAll.length).toBeGreaterThan(0);
+});
+
+/**
+ * The section says "four" three times — in the deck, the intro and the outro —
+ * about an array in the same file. A fifth shape would leave three sentences on
+ * the published page saying four, with everything green.
+ *
+ * The assertion is that the spelled count is *present*, not that no other
+ * number word appears: "one" is doing honest work in the outro as a quantifier,
+ * and a check that banned it would be wrong about correct prose.
+ */
+const NUMBERS = [
+  "zero",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+];
+
+test("the prose counts the shapes correctly", () => {
+  const prose = `${MOULDS.deck} ${MOULDS.intro} ${MOULDS.outro}`.toLowerCase();
+  expect(prose).toContain(NUMBERS[MOULDS_LIST.length] ?? "unspellable");
 });
 
 test("an app is listed once per shape", () => {
