@@ -59,16 +59,18 @@ test("every label agrees with the url it labels", () => {
     ).pathname.split("/");
     const [labelRepo = "", ...labelPath] = app.label.split("/");
 
+    // Named by shape as well as label: the same app is listed under more than
+    // one shape on purpose, so a label alone does not say which entry is wrong.
+    const at = `${app.shape} › ${app.label}`;
+
     if (labelRepo !== repo) {
-      mismatched.push(`${app.label}: url is in "${repo}", not "${labelRepo}"`);
+      mismatched.push(`${at}: url is in "${repo}", not "${labelRepo}"`);
     }
     if (labelPath.join("/") !== rest.join("/")) {
-      mismatched.push(
-        `${app.label}: url points at "${rest.join("/") || repo}"`,
-      );
+      mismatched.push(`${at}: url points at "${rest.join("/") || repo}"`);
     }
     if (labelPath.length > 0 && kind !== "tree") {
-      mismatched.push(`${app.label}: url is not a tree url`);
+      mismatched.push(`${at}: url is not a tree url`);
     }
   }
 

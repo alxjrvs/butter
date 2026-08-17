@@ -39,6 +39,7 @@ packages/             the house graph, bottom-up. Siblings never import siblings
   content/            every string on the page, as typed data + its inline prose markup
     versions.test.ts  asserts VERSIONS matches the catalog and .bun-version
     recipe.test.ts    asserts every quoted snippet still matches its file
+    moulds.test.ts    asserts each app link's shape, and the counts in the prose
   tokens/             framework-agnostic: the two-ink palette + two type stacks
   component-lib/      the ONLY place page STRUCTURE is built
     src/marks|blocks|sections/   the taxonomy; one story file each
@@ -118,11 +119,12 @@ reading why is how the property it protects gets lost.
   this page, and a count of "how many repos" is not either — counting dates the claim.
   `moulds.test.ts` asserts the half that is checkable offline: the scheme, the host, that a
   label still agrees with the url under it, and that the prose's spelled count matches the
-  number of shapes. **What it cannot check is whether the url resolves** — public or private,
-  `main` still the default branch, `apps/<name>` not since renamed. Those are facts about
-  GitHub on the day someone reads the page, not about this file, so open all of them by hand
-  when adding or retargeting an entry. They were 200 when this section landed. `Mould.apps` is a non-empty tuple, so a shape with nothing in it is a
-  compile error rather than an empty list on the page.
+  number of shapes. **What it cannot check is whether the url resolves** — public or
+  private, `main` still the default branch, `apps/<name>` not since renamed. Those are
+  facts about GitHub on the day someone reads the page, not about this file, so open
+  every one of them by hand when adding or retargeting an entry. `Mould.apps` is a
+  non-empty tuple, so a shape with nothing in it is a compile error rather than an
+  empty list on the page.
 - **Versions are looked up, never typed.** `VERSIONS` in `packages/content` is the only place
   a version is written for display, `Version` takes a key rather than a string, and
   `versions.test.ts` asserts every entry against the catalog and `.bun-version`. That is what
