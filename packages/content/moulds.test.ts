@@ -87,8 +87,16 @@ test("every label agrees with the url it labels", () => {
  * the claims are derived from `MOULDS_LIST` here instead of trusted: add an app
  * that makes either sentence false and the build says so.
  */
+// Identity comes from the url's `owner/repo`, not the label's first segment.
+// The label is a shorthand and shorthands collide: `alxjrvs/foo` and
+// `Other/foo` are one repository to a first-segment reading, which would let
+// "one repository has all four" pass on a shape that is really in two.
 const reposIn = (shape: (typeof MOULDS_LIST)[number]): ReadonlySet<string> =>
-  new Set(shape.apps.map((app) => app.label.split("/")[0] ?? ""));
+  new Set(
+    shape.apps.map((app) =>
+      new URL(app.href).pathname.split("/").slice(1, 3).join("/"),
+    ),
+  );
 
 test("every shape is in more than one repository", () => {
   const lonely = MOULDS_LIST.filter((mould) => reposIn(mould).size < 2).map(
@@ -127,8 +135,20 @@ const NUMBERS = [
 ];
 
 test("the prose counts the shapes correctly", () => {
-  const prose = `${MOULDS.deck} ${MOULDS.intro} ${MOULDS.outro}`.toLowerCase();
-  expect(prose).toContain(NUMBERS[MOULDS_LIST.length] ?? "unspellable");
+  const word = NUMBERS[MOULDS_LIST.length] ?? "unspellable";
+  const parts = [
+    ["deck", MOULDS.deck],
+    ["intro", MOULDS.intro],
+    ["outro", MOULDS.outro],
+  ] as const;
+
+  // Each of the three separately, not the three concatenated: against the
+  // joined string, updating the deck alone would go green with two sentences
+  // still saying the old number — which is the whole failure being guarded.
+  const stale = parts
+    .filter(([, text]) => !text.toLowerCase().includes(word))
+    .map(([where]) => where);
+  expect(stale).toEqual([]);
 });
 
 test("an app is listed once per shape", () => {
