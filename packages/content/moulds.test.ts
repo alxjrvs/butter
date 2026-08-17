@@ -47,23 +47,59 @@ test("every label agrees with the url it labels", () => {
   const mismatched: string[] = [];
 
   for (const app of apps) {
-    const [repo = "", ...path] = app.label.split("/");
+    // `/owner/repo` for a repository, `/owner/repo/tree/<ref>/<path>` inside
+    // one. Split into segments rather than searched: a substring test for
+    // `/<repo>/` is satisfied by the OWNER segment just as happily, so the one
+    // disagreement this test exists to catch — a label naming a repository the
+    // url does not — is the one it would miss.
+    // Leading "" from the leading slash, then owner, then the repository.
+    const [, , repo = "", kind = "", , ...rest] = new URL(
+      app.href,
+    ).pathname.split("/");
+    const [labelRepo = "", ...labelPath] = app.label.split("/");
 
-    if (path.length === 0) {
-      if (!app.href.endsWith(`/${repo}`)) {
-        mismatched.push(`${app.label}: url does not end at the repository`);
-      }
-      continue;
+    if (labelRepo !== repo) {
+      mismatched.push(`${app.label}: url is in "${repo}", not "${labelRepo}"`);
     }
-    if (!app.href.includes(`/${repo}/`)) {
-      mismatched.push(`${app.label}: url names no repository "${repo}"`);
+    if (labelPath.join("/") !== rest.join("/")) {
+      mismatched.push(
+        `${app.label}: url points at "${rest.join("/") || repo}"`,
+      );
     }
-    if (!app.href.endsWith(`/${path.join("/")}`)) {
-      mismatched.push(`${app.label}: url does not end at ${path.join("/")}`);
+    if (labelPath.length > 0 && kind !== "tree") {
+      mismatched.push(`${app.label}: url is not a tree url`);
     }
   }
 
   expect(mismatched).toEqual([]);
+});
+
+/**
+ * The outro says the shape is chosen per app: every shape appears in more than
+ * one repository, and one repository is in all four at once.
+ *
+ * That is a count in prose about data sitting in the same file, which is the
+ * drift `versions.test.ts` and `recipe.test.ts` exist to stop — and CLAUDE.md's
+ * own "counting dates the claim" rule is two lines from where it is written. So
+ * the claims are derived from `MOULDS_LIST` here instead of trusted: add an app
+ * that makes either sentence false and the build says so.
+ */
+const reposIn = (shape: (typeof MOULDS_LIST)[number]): ReadonlySet<string> =>
+  new Set(shape.apps.map((app) => app.label.split("/")[0] ?? ""));
+
+test("every shape is in more than one repository", () => {
+  const lonely = MOULDS_LIST.filter((mould) => reposIn(mould).size < 2).map(
+    (mould) => mould.shape,
+  );
+  expect(lonely).toEqual([]);
+});
+
+test("one repository is in every shape", () => {
+  const [first, ...others] = MOULDS_LIST.map(reposIn);
+  const inAll = [...(first ?? [])].filter((repo) =>
+    others.every((repos) => repos.has(repo)),
+  );
+  expect(inAll.length).toBeGreaterThan(0);
 });
 
 test("an app is listed once per shape", () => {
