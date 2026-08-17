@@ -53,13 +53,15 @@ export type AppRef = {
 /**
  * One of the shapes an `apps/*` entry gets pressed into.
  *
- * `apps` is required, so a shape cannot be added to the page without naming
- * something that is actually in it.
+ * `apps` is a non-empty tuple rather than an array, which is the difference
+ * between requiring the field and requiring an answer: `readonly AppRef[]`
+ * admits `[]`, and a shape with nothing in it is the exact claim this section
+ * exists to avoid making. Empty is now a compile error.
  */
 export type Mould = {
   readonly shape: string;
   readonly tag: string;
-  readonly apps: readonly AppRef[];
+  readonly apps: readonly [AppRef, ...AppRef[]];
   readonly body: Html;
 };
 

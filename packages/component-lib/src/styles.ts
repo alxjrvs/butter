@@ -375,7 +375,11 @@ const LISTS = `
     font-family: var(--mono);
     font-size: 0.72rem;
   }
-  .apps a { color: var(--ink-3); }
+  /* --ink-2, not the --ink-3 the tag line uses: these are the only links in the
+     section and they are 0.72rem, where --ink-3 on light paper is about 3.3:1
+     and misses AA. The tag beside them is decoration and can be dimmer; a link
+     a reader is meant to follow cannot be. */
+  .apps a { color: var(--ink-2); }
   .apps a:hover { color: var(--ink); }
 
   .prose.outro { margin-top: 1.8rem; }
