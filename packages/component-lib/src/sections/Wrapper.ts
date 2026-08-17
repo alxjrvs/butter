@@ -3,12 +3,15 @@ import { escapeHtml, type Html, html } from "@butter/core";
 import { CommandBlock } from "../blocks/CommandBlock.ts";
 import { Version } from "../marks/Version.ts";
 
+/**
+ * Keyed by `VersionKey`, so this map cannot fall behind `VERSIONS`: a new
+ * version gains a key here as a typecheck error rather than as a missing name
+ * nobody noticed.
+ */
 const LABELS: Record<VersionKey, string> = {
   bun: "Bun",
   typescript: "TypeScript",
   biome: "Biome",
-  knip: "Knip",
-  lefthook: "Lefthook",
 };
 
 /**

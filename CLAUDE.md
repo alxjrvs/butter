@@ -125,6 +125,20 @@ reading why is how the property it protects gets lost.
   every one of them by hand when adding or retargeting an entry. `Mould.apps` is a
   non-empty tuple, so a shape with nothing in it is a compile error rather than an
   empty list on the page.
+- **The nutrition label floats, and three things hold that up.** Above `62rem` it is
+  `float: right` with a negative right margin, so the section's prose wraps around it and the
+  panel overhangs the column. (1) `section` is `display: flow-root`, or the float escapes
+  Cream and the *next* section's heading wraps around it. (2) `Cream` emits the label
+  **before** the prose, because a float is placed from where it sits in the flow — move it
+  after and only what follows it wraps. (3) The float lives in a `min-width` query, so
+  narrow viewports get the plain block and never a sideways scroll; the overhang spends the
+  section's own `1.5rem` of padding first, so only `3rem` lands outside the `46rem` column.
+  Text wraps to about `25rem` beside it, which is short for a measure and is the trade.
+- **The label prints no versions, and the acronym is not spelled twice.** Each name-key row
+  colours the first character of its own `word` — there is no `letter` field to disagree with
+  it, and `acronym.test.ts` asserts the initials still spell `WRAPPER.name`. `VERSIONS` holds
+  only what the banner prints; an entry nothing renders is a version the test asserts about
+  nobody, so printing a new one is a typecheck error naming the missing key.
 - **Versions are looked up, never typed.** `VERSIONS` in `packages/content` is the only place
   a version is written for display, `Version` takes a key rather than a string, and
   `versions.test.ts` asserts every entry against the catalog and `.bun-version`. That is what

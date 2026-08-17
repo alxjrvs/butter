@@ -6,19 +6,25 @@ import { SectionShell } from "../blocks/SectionShell.ts";
 /**
  * "Cream" on the page: what the name stands for, and what is in the tin.
  *
- * The label comes first, and one sentence of lead-in is all that precedes it.
  * Its six bold rows are the six letters, so the panel is the first and only
  * place the acronym gets spelled out — prose that listed the letters ahead of
  * it was explaining the joke before the punchline and made the label a repeat.
+ *
+ * The label is emitted BEFORE the prose it sits beside, because it floats: a
+ * float is placed from where it appears in the flow, so markup order is what
+ * decides how much text gets to wrap around it. Emitted after the lead it
+ * started a paragraph lower and left the panel hanging past the end of the
+ * section's last line. "Here is the tin" still lands — the tin is right there,
+ * alongside the sentence, rather than under it.
  */
 export function Cream(): Html {
   return SectionShell({
     id: "cream",
     heading: CREAM.heading,
     deck: CREAM.deck,
-    body: html(`    <div class="prose">${CREAM.lead}
+    body: html(`${NutritionLabel({ nameKey: NAME_KEY, also: ALSO_INSIDE, freeFrom: FREE_FROM })}
+    <div class="prose">${CREAM.lead}
     </div>
-${NutritionLabel({ nameKey: NAME_KEY, also: ALSO_INSIDE, freeFrom: FREE_FROM })}
     <div class="prose">${CREAM.body}
     </div>`),
   });

@@ -75,6 +75,11 @@ const BASE = `
   .prose { max-width: var(--measure); }
   .prose p { margin: 0 0 1rem; }
   .prose p:last-child { margin-bottom: 0; }
+  /* Two prose blocks in a row are one piece of writing split around something
+     that sits between them in the source but not on the page. The last-child
+     rule above zeroes the gap at the seam, so it is put back here — otherwise
+     the two paragraphs either side of it run together as if they were one. */
+  .prose + .prose { margin-top: 1rem; }
   .prose .lede { color: var(--ink-2); }
 
   /* The page's headings are butter — Cream, The churn, Buttermilk. The deck is
@@ -176,7 +181,10 @@ const BANNER = `
 `;
 
 const SECTIONS = `
-  section { padding-top: 4rem; }
+  /* \`flow-root\` so a section contains its own floats. Without it the label
+     floats out of Cream and into the top of the next section, and what wraps
+     around it there is that section's heading. */
+  section { padding-top: 4rem; display: flow-root; }
 
   section > h2 {
     margin: 0 0 1.2rem;
@@ -253,6 +261,28 @@ const LABEL = `
     border: 3px solid var(--label-ink);
     font-family: var(--label);
   }
+
+  /* Floated into the margin, so the commentary reads AROUND the tin rather than
+     after it, and pulled past the column edge so it sits on the page like
+     something stuck there rather than something set in the copy.
+
+     The 4.5rem overhang spends the section's own 1.5rem of padding first, so
+     only 3rem lands outside the 46rem column — which needs a viewport of about
+     52rem to have somewhere to land. Below the breakpoint the float is dropped
+     entirely: the alternative is a page that scrolls sideways on a phone, and
+     the label is perfectly happy as a block.
+
+     Text wraps to roughly 25rem beside it. That is short for a measure and it
+     is the trade being made; the section's own body is the only prose that
+     pays it, and it is commentary rather than the argument. */
+  @media (min-width: 62rem) {
+    .label {
+      float: right;
+      width: 21rem;
+      max-width: none;
+      margin: 0.4rem -4.5rem 1.4rem 2.5rem;
+    }
+  }
   .ltitle {
     margin: 0;
     font-size: clamp(1.7rem, 4.6vw, 2.2rem);
@@ -279,22 +309,16 @@ const LABEL = `
     font-weight: 700;
   }
   .lamount { font-size: 0.72rem; padding-bottom: 0.15rem; }
-  .lv {
-    flex: none;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-variant-numeric: tabular-nums;
-  }
   .lrow { padding: 0.3rem 0; border-bottom: 1px solid var(--label-ink); }
   .lrow:last-of-type { border-bottom: 0; }
   .lrow.sub { padding-left: 1rem; }
   .lrow.sub .lhead { font-weight: 400; }
-  .letter {
-    display: inline-block;
-    min-width: 1rem;
-    font-weight: 800;
-    color: var(--accent-ink);
-  }
+  /* The word's own first character, not a letter standing in a gutter beside
+     it — so neither the inline-block nor the min-width that used to reserve
+     that gutter, both of which set the letter apart, which is the thing being
+     undone. It stays a shade heavier than the word it starts, so the acronym
+     still reads at a glance. */
+  .letter { font-weight: 800; color: var(--accent-ink); }
   .ldetail { margin: 0.1rem 0 0; font-size: 0.72rem; line-height: 1.35; }
   .lrow.sub .ldetail { padding-left: 0; }
   .lfree {
