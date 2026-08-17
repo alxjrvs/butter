@@ -15,8 +15,10 @@ const LABELS: Record<VersionKey, string> = {
  * The one large field of butter on the page: name, claim, what it is, and
  * three commands that run.
  *
- * The contents line is plain links rather than a rail or a numbered index.
- * Eight headings on one page want a way to jump and nothing more than that.
+ * The contents line is plain links rather than a rail or a numbered index. A
+ * page of this length wants a way to jump and nothing more than that. It counts
+ * no headings on purpose — it renders whatever is in `SECTIONS`, and a comment
+ * that tallies them goes stale the first time one is added.
  */
 export function Wrapper(): Html {
   const versions = WRAPPER.versions

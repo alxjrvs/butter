@@ -13,6 +13,7 @@ export const SECTIONS: readonly SectionRef[] = [
   { id: "spread", label: "Spread it" },
   { id: "handle", label: "One handle" },
   { id: "lamination", label: "Lamination" },
+  { id: "moulds", label: "Moulds" },
   { id: "buttermilk", label: "Buttermilk" },
   { id: "recipe", label: "The recipe" },
   { id: "keeping", label: "Keeping" },

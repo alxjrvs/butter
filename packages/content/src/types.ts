@@ -39,6 +39,33 @@ export type Exclusion = {
 };
 
 /**
+ * A deployable this page points at, as data rather than a link in the prose.
+ *
+ * `href` is absolute and always a public repository: the page is published
+ * under a path prefix, so a root-absolute reference would 404 there, and an
+ * example a reader cannot open is a claim rather than an example.
+ */
+export type AppRef = {
+  readonly label: string;
+  readonly href: string;
+};
+
+/**
+ * One of the shapes an `apps/*` entry gets pressed into.
+ *
+ * `apps` is a non-empty tuple rather than an array, which is the difference
+ * between requiring the field and requiring an answer: `readonly AppRef[]`
+ * admits `[]`, and a shape with nothing in it is the exact claim this section
+ * exists to avoid making. Empty is now a compile error.
+ */
+export type Mould = {
+  readonly shape: string;
+  readonly tag: string;
+  readonly apps: readonly [AppRef, ...AppRef[]];
+  readonly body: Html;
+};
+
+/**
  * A contiguous run of lines quoted from a file in this repository.
  *
  * `file` is repo-relative and is what `recipe.test.ts` reads to prove the quote

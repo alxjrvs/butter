@@ -100,8 +100,8 @@ export const LAYERS: readonly Layer[] = [
         <p>
           Jobs fan out; one aggregate job is the only check branch protection requires. Adding
           a job never means editing branch protection. It is also the easiest thing on this
-          page to write in a way that looks right and silently passes forever — the next
-          section is how it's written and what goes wrong.
+          page to write in a way that looks right and silently passes forever, which is what
+          "One handle" above is about.
         </p>`),
   },
   {
