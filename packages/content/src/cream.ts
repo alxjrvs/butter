@@ -80,7 +80,8 @@ export const NAME_KEY: readonly NameKeyEntry[] = [
   },
   {
     word: "Edge-deployed",
-    detail: "Netlify for the web, Render for workers, Convex for the backend",
+    detail:
+      "Cloudflare or Netlify for the web, Render for workers, Convex for the backend",
   },
   {
     word: "React",

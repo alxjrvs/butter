@@ -137,6 +137,8 @@ export const MOULDS_LIST: readonly Mould[] = [
           forever — get their own deployable, and it is the smallest thing in the repository: a
           <code>netlify.toml</code>, one function reading a Blobs store, and a
           <code>public/</code> holding a robots.txt. The build command is <code>true</code>.
+          On Cloudflare it is the same shape with different nouns — a Worker in front of an R2
+          bucket, a <code>wrangler.jsonc</code> instead, and the same empty build.
         </p>
         <p>
           Being a separate site is the entire point. The site that renders the pages promises

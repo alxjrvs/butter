@@ -122,11 +122,30 @@ export const LAYERS: readonly Layer[] = [
   },
   {
     title: "Platform",
-    tag: "netlify · render · convex",
+    tag: "cloudflare first",
     body: html(`
         <p>
-          Netlify for every web surface, Render for workers and bots, Convex for the backend
-          where there is one.
+          Cloudflare is where a new deployable starts, because one account covers a whole
+          deployable: a Worker for anything with a runtime, static assets served out of that
+          same Worker rather than a second site, and R2, D1, KV or Queues for whatever state
+          the surface needs. One <code>wrangler.jsonc</code> describes all of it, and
+          <code>wrangler deploy</code> and <code>wrangler tail</code> are the only two
+          commands anybody has to know.
+        </p>
+        <p>
+          That is what earns it the default rather than the region map. Everything here is
+          built for a contributor who works fast and reads no dashboard, so a platform whose
+          config is a file, whose deploy is a command that exits non-zero and whose logs come
+          back down the same pipe is the one the churn can actually reach. A platform whose
+          failure mode is "go and click something" is one it cannot.
+        </p>
+        <p>
+          Netlify is first-class beside it and keeps the web surfaces already on it — the
+          choice is made per app, the way the mould is, not once for a repository. Render holds
+          what has to stay running: a Discord gateway is one long-lived connection and one
+          instance, which is a property of the workload rather than a gap to route around.
+          Convex where the backend wants to be reactive and typed rather than a store sitting
+          next to a worker.
         </p>`),
   },
   {
