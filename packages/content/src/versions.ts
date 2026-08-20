@@ -15,7 +15,7 @@
  * case in the test.
  */
 export const VERSIONS = {
-  bun: "1.3.14",
+  bun: "1.4.0",
   typescript: "7.0.2",
   biome: "2.5.8",
 } as const;
